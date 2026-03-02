@@ -1,0 +1,2049 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City of Saints Solar — Multan's #1 Solar Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Reset and Base Styles */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  /* Updated for a modern dark theme with sun accents */
+  --sun:#F59E0B; /* Orange/Amber - Main accent */
+  --sun2:#FCD34D; /* Lighter Orange/Amber */
+  --sun3:#FEF3C7; /* Very light Orange/Amber */
+
+  --dark-bg:#1A1A2E; /* Main background dark blue-grey */
+  --dark-bg2:#25254A; /* Slightly lighter dark for alternate sections */
+  --dark-bg3:#30305D; /* Darker shade for cards/forms/elements */
+  --dark-bg4:#404070; /* Even darker for deeper elements/hover */
+
+  --text-light:#E0E0E0; /* Main text color light */
+  --text-secondary:#A0A0B0; /* Secondary text color */
+  --text-tertiary:#707080; /* Tertiary text/placeholders */
+
+  --blue:#0EA5E9; /* Bright Blue - Secondary accent */
+  --blue2:#38BDF8; /* Lighter Blue */
+  --green:#10B981; /* Green for WhatsApp */
+
+  /* Old variable names mapped to new ones for easier replacement */
+  --dark:var(--dark-bg);
+  --dark2:var(--dark-bg2);
+  --dark3:var(--dark-bg3);
+  --dark4:var(--dark-bg4);
+  --white:var(--text-light); /* 'white' previously dark text, now light text */
+  --gray:var(--text-secondary); /* 'gray' previously dark secondary, now light secondary */
+  --gray2:var(--text-tertiary); /* 'gray2' previously light gray, now light tertiary */
+  --off:var(--dark-bg2); /* Use a dark background shade */
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--sun);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:all .15s}
+#cur-r{position:fixed;width:38px;height:38px;border:1.5px solid rgba(245,158,11,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--dark);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px}
+.l-icon{font-size:56px;animation:spin 2s linear infinite;color:var(--sun)}
+.l-name{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:6px;color:var(--sun);opacity:0;animation:fu .6s .3s ease forwards}
+.l-sub{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gray);opacity:0;animation:fu .6s .6s ease forwards}
+.l-bar{width:200px;height:2px;background:rgba(255,255,255,.08);overflow:hidden;opacity:0;animation:fu .3s .9s ease forwards}
+.l-fill{height:100%;background:linear-gradient(90deg,var(--sun),var(--sun2));animation:lf 1.6s 1s ease forwards;width:0}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes lf{to{width:100%}}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.topbar{background:var(--sun);color:var(--dark);text-align:center;padding:9px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+nav{position:sticky;top:0;z-index:900;background:rgba(26,26,46,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1);padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:68px}
+.n-logo{display:flex;align-items:center;gap:10px}
+.n-logo-icon{font-size:28px; color: var(--sun);}
+.n-logo-text{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:2px;color:var(--white)}
+.n-logo-text span{color:var(--sun)}
+.n-links{display:flex;gap:26px;list-style:none}
+.n-links a{color:var(--gray);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;transition:color .3s}
+.n-links a:hover{color:var(--sun)}
+.n-actions{display:flex;gap:10px;align-items:center}
+/* Search Input */
+.n-search-input {
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 4px;
+  background: var(--dark3);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color .3s;
+}
+.n-search-input::placeholder {
+  color: var(--gray2);
+}
+.n-search-input:focus {
+  border-color: var(--sun);
+}
+.n-call{color:var(--white);text-decoration:none;font-size:11px;letter-spacing:1.5px;border:1px solid rgba(255,255,255,.12);padding:8px 16px;transition:all .3s}
+.n-call:hover{border-color:var(--sun);color:var(--sun)}
+.n-cta{background:var(--sun);color:var(--dark);padding:9px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s}
+.n-cta:hover{background:var(--sun2)}
+
+/* PAGE SYSTEM */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* HOME HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.hero-l{display:flex;flex-direction:column;justify-content:center;padding:0 6% 0 7%;position:relative;z-index:2;background:var(--dark);padding-top:100px;padding-bottom:50px;}
+.hero-bg-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+/* Updated Hero Text Style for simplicity and larger impact */
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(56px,7.5vw,100px); /* Larger font size */
+  font-weight:800;
+  line-height:1.05; /* Slightly more space */
+  letter-spacing:-0.5px; /* Less negative for simplicity */
+  color:var(--white);
+  margin-bottom:20px;
+  opacity:0;
+  animation:fu .8s .65s ease forwards;
+}
+.hero h1 span{color:var(--sun);display:block}
+.hero-p{
+  font-size:clamp(16px,1.5vw,19px); /* Increased paragraph size */
+  line-height:1.7; /* Slightly tighter for better readability at larger size */
+  color:var(--gray);
+  max-width:480px; /* Wider for more content */
+  margin-bottom:34px;
+  font-weight:400; /* Medium weight for readability */
+  opacity:0;
+  animation:fu .8s .8s ease forwards;
+}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;opacity:0;animation:fu .8s .95s ease forwards}
+.btn-sun{background:linear-gradient(135deg,var(--sun),var(--sun2));color:var(--dark);padding:14px 32px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-sun:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,158,11,.35)}
+.btn-wa{background:#25D366;color:var(--dark);padding:14px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;font-family:'DM Sans',sans-serif}
+.btn-wa:hover{background:#16a34a}
+.btn-ghost{border:1px solid rgba(255,255,255,.15);color:var(--white);padding:14px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .3s;font-family:'DM Sans',sans-serif}
+.btn-ghost:hover{border-color:var(--sun);color:var(--sun)}
+.hero-stats{display:flex;border-top:1px solid rgba(245,158,11,.12);padding-top:28px;opacity:0;animation:fu .8s 1.1s ease forwards}
+.hs{padding-right:26px;margin-right:26px;border-right:1px solid rgba(245,158,11,.12)}
+.hs:last-child{border:none;padding:0;margin:0}
+.hs-n{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--sun);line-height:1}
+.hs-l{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-top:4px}
+.hero-r{position:relative;overflow:hidden;background:var(--dark2);height:500px; padding: 0 5%;}
+/* Image Slideshow Styles */
+.hero-slideshow {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.hero-slide.active {
+  opacity: 1;
+}
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.75) saturate(.9);
+}
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 30px;
+  opacity: 0;
+  transition: opacity .5s;
+}
+.hero-slide.active .hero-slide-overlay {
+  opacity: 1;
+}
+.hero-slide-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.2;
+}
+.hero-slide-text span {
+  color: var(--sun);
+  display: block;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* TICKER */
+.ticker{border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:12px 0;overflow:hidden;background:var(--dark2)}
+.ticker-track{display:flex;gap:55px;animation:tq 22s linear infinite;white-space:nowrap}
+.ti{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--sun);display:flex;align-items:center;gap:18px}
+.td{width:4px;height:4px;border-radius:50%;background:var(--sun)}
+
+/* BRAND TICKER */
+.brand-ticker{
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  padding:20px 0;
+  overflow:hidden;
+  background:var(--dark3);
+  margin-top:40px;
+}
+.brand-track{
+  display:flex;
+  gap:60px;
+  animation:tq 30s linear infinite;
+  white-space:nowrap;
+  align-items:center;
+}
+.brand-logo{
+  height:50px;
+  width:auto;
+  filter:grayscale(100%) brightness(0.6) contrast(1.1);
+  opacity:0.7;
+  transition:opacity .3s, filter .3s;
+}
+.brand-logo:hover{
+  filter:grayscale(0%) brightness(1) contrast(1);
+  opacity:1;
+}
+
+/* SECTION COMMON */
+.sec{padding:80px 5%; position: relative; z-index: 1;}
+.sec-alt{background:var(--dark2)}
+.sec-alt2{background:var(--dark3)}
+.eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--sun);display:block;margin-bottom:10px}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;color:var(--white);line-height:1.05;margin-bottom:16px}
+.sec-title span{color:var(--sun)}
+.sec-sub{font-size:13px;color:var(--gray);line-height:1.8;max-width:600px;font-weight:300}
+
+/* New: Section backgrounds for international feel */
+.sec-bg-services {
+  background-image: url('https://images.unsplash.com/photo-1517441865768-3e5e1e77f0d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1ODU2MjF8MHwxfHNlYXJjaHw1OXx8c29sYXIlMjBhcnJheXxlbnwxfHx8fDE3MDkwNTgyMTN8MA&ixlib=rb-4.0.3&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* For subtle parallax */
+  position: relative;
+  overflow: hidden;
+  color: var(--white); /* Ensure text is readable on dark background */
+}
+.sec-bg-services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  z-index: 0;
+}
+.sec-bg-services .sec-title, .sec-bg-services .sec-sub, .sec-bg-services .eyebrow, .sec-bg-services .svc-card {
+  position: relative;
+  z-index: 1; /* Bring text/cards above overlay */
+}
+.sec-bg-services .svc-card {
+    background: var(--dark-bg3); /* Darker cards for contrast */
+    border: 1px solid rgba(255,255,255,0.1); /* Lighter border */
+    color: var(--white); /* Ensure card text is readable */
+}
+.sec-bg-services .svc-card .svc-name, .sec-bg-services .svc-card .svc-icon, .sec-bg-services .svc-card .svc-tag {
+    color: var(--white);
+}
+.sec-bg-services .svc-card .svc-desc {
+    color: var(--gray);
+}
+
+
+.sec-bg-products {
+  background-image: url('https://images.unsplash.com/photo-1629707920392-411a7f6c6f72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1ODU2MjF8MHwxfHNlYXJjaHwyM3x8c29sYXIlMjBwYW5lbHxlbnwxfHx8fDE3MDkwNTc0NTN8MA&ixlib=rb-4.0.3&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+}
+.sec-bg-products::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  z-index: 0;
+}
+.sec-bg-products .sec-title, .sec-bg-products .sec-sub, .sec-bg-products .eyebrow, .sec-bg-products .prod-card, .sec-bg-products .content-section {
+  position: relative;
+  z-index: 1;
+}
+.sec-bg-products .prod-card {
+    background: var(--dark-bg3);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+}
+.sec-bg-products .prod-card .prod-name, .sec-bg-products .prod-card .prod-icon, .sec-bg-products .prod-card .prod-price {
+    color: var(--white);
+}
+.sec-bg-products .prod-card .prod-desc {
+    color: var(--gray);
+}
+.sec-bg-products .content-section h3, .sec-bg-products .content-section p, .sec-bg-products .content-section ul, .sec-bg-products .content-section li {
+    color: var(--gray); /* Ensure text is readable on the overlay */
+}
+/* Ensure links are visible on the overlay */
+.sec-bg-products .content-section a {
+    color: var(--sun);
+}
+
+
+/* VIDEOS SECTION */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 50px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  background: var(--dark3); /* Placeholder background */
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: brightness(0.8); /* Slightly dim videos for dark theme */
+}
+
+
+/* SERVICES GRID */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px}
+.svc-card{background:var(--dark3);padding:38px 28px;border-top:3px solid transparent;transition:all .4s;cursor:pointer;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,158,11,0.06),transparent);opacity:0;transition:opacity .4s}
+.svc-card:hover{border-top-color:var(--sun);transform:translateY(-4px)}
+.svc-card:hover::before{opacity:1}
+.svc-icon{font-size:42px;margin-bottom:16px;color:var(--sun);}
+.svc-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px}
+.svc-desc{font-size:12px;color:var(--gray);line-height:1.7;margin-bottom:16px;font-weight:300}
+.svc-tag{display:inline-block;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--sun);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px}
+
+/* PRODUCTS */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:50px}
+.prod-card{background:var(--dark3);padding:32px 22px;border-bottom:3px solid transparent;transition:all .4s;text-align:center;cursor:pointer}
+.prod-card:hover{border-bottom-color:var(--sun);background:var(--dark4);transform:translateY(-3px)}
+.prod-icon{font-size:48px;margin-bottom:14px;color:var(--sun);}
+.prod-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:6px}
+.prod-desc{font-size:11px;color:var(--gray);line-height:1.65;margin-bottom:14px;font-weight:300}
+.prod-price{font-family:'Syne',sans-serif;font-size:20px;color:var(--sun);font-weight:800}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px}
+.proj-card{position:relative;overflow:hidden;height:260px;cursor:pointer}
+.proj-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.9);transition:all .6s}
+.proj-card:hover img{filter:brightness(.85) saturate(1);transform:scale(1.06)}
+.proj-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+.proj-loc{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sun);margin-bottom:4px}
+.proj-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white)}
+.proj-kw{font-size:12px;color:var(--gray);margin-top:3px}
+
+/* CALCULATOR */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:50px}
+.calc-form{background:var(--dark3);padding:40px;border:1px solid rgba(255,255,255,.12)}
+.calc-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:6px}
+.calc-sub{font-size:11px;color:var(--gray);margin-bottom:24px;letter-spacing:1px}
+.fi{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;margin-bottom:12px;outline:none;transition:border .3s}
+.fi::placeholder{color:var(--gray2)}
+.fi:focus{border-color:var(--sun)}
+.fs{width:100%;padding:13px 16px;background:var(--dark4);border:1px solid rgba(255,255,255,.15);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;margin-bottom:12px;outline:none;appearance:none}
+.fs option{background:var(--dark4);color:var(--white)}
+.calc-result{background:var(--dark3);padding:40px;border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;justify-content:center}
+.calc-result-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:24px}
+.calc-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(245,158,11,.08)}
+.calc-item:last-child{border:none}
+.ci-label{font-size:12px;color:var(--gray)}
+.ci-val{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--sun)}
+
+/* GALLERY */
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:2px;margin-top:50px}
+.gi{overflow:hidden;position:relative}
+.gi:first-child{grid-column:1/3}
+.gi:nth-child(5){grid-column:3/5}
+.gi img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.9);transition:all .6s}
+.gi:hover img{filter:brightness(.85) saturate(1);transform:scale(1.05)}
+.gi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px}
+.gi:hover .gi-ov{opacity:1}
+.gi-tag{font-family:'Syne',sans-serif;font-size:12px;color:var(--sun);letter-spacing:2px;text-transform:uppercase}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px}
+.tc{background:var(--dark3);padding:32px 26px;border-left:3px solid transparent;transition:border-color .3s}
+.tc:hover{border-left-color:var(--sun)}
+.tc-stars{color:var(--sun);font-size:14px;margin-bottom:8px}
+.tc-date{font-size:10px;color:var(--gray2);margin-bottom:14px;letter-spacing:1px}
+.tc-text{font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:18px;font-style:italic;font-weight:300}
+.tc-auth{display:flex;align-items:center;gap:12px}
+.tc-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--sun),var(--sun2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--dark);}
+.tc-name{font-size:13px;color:var(--white);font-weight:600}
+.tc-loc{font-size:10px;color:var(--gray2)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:50px;margin-top:50px}
+.contact-info{display:flex;flex-direction:column;gap:16px}
+.ci-card{background:var(--dark3);padding:22px 20px;display:flex;align-items:center;gap:16px;border-left:3px solid transparent;transition:border-color .3s;text-decoration:none}
+.ci-card:hover{border-left-color:var(--sun)}
+.ci-icon{font-size:24px;flex-shrink:0;color:var(--sun);}
+.ci-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);margin-bottom:4px}
+.ci-val{font-size:14px;color:var(--white);font-weight:500}
+.contact-form{background:var(--dark3);padding:40px;border:1px solid rgba(255,255,255,.12)}
+.cf-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:4px}
+.cf-sub{font-size:11px;color:var(--gray);margin-bottom:22px;letter-spacing:1px;text-transform:uppercase}
+.btn-sun-full{width:100%;padding:15px;background:linear-gradient(135deg,var(--sun),var(--sun2));color:var(--dark);border:none;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-weight:700;transition:all .3s;margin-bottom:8px}
+.btn-sun-full:hover{opacity:.9}
+.btn-wa-full{width:100%;padding:14px;background:#25D366;color:var(--dark);border:none;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-weight:700;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-wa-full:hover{background:#16a34a}
+
+/* QUOTE / BOOKING */
+.quote-wrap{max-width:800px;margin:50px auto 0}
+.quote-form{background:var(--dark3);padding:50px;border:1px solid rgba(255,255,255,.15)}
+.quote-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:4px}
+.quote-sub{font-size:11px;color:var(--gray);margin-bottom:28px;text-transform:uppercase;letter-spacing:2px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fdiv{height:1px;background:rgba(255,255,255,.1);margin:16px 0}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:50px}
+.why-card{background:var(--dark3);padding:34px 24px;text-align:center;border-bottom:3px solid transparent;transition:all .4s}
+.why-card:hover{border-bottom-color:var(--sun);background:var(--dark4);transform:translateY(-3px)}
+.why-icon{font-size:40px;margin-bottom:14px;color:var(--sun);}
+.why-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:7px}
+.why-desc{font-size:11px;color:var(--gray);line-height:1.7;font-weight:300}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:50px}
+.about-img{position:relative;height:450px;overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.9);}
+.about-badge{position:absolute;bottom:20px;right:20px;background:var(--sun);color:var(--dark);padding:16px 20px;font-family:'Syne',sans-serif;text-align:center}
+.ab-num{font-size:36px;font-weight:800;line-height:1}
+.ab-txt-badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-top:2px}
+.about-txt{display:flex;flex-direction:column;gap:18px}
+.at-stat{display:flex;align-items:center;gap:16px;background:var(--dark3);padding:16px 20px}
+.at-stat-n{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--sun);min-width:60px}
+.at-stat-l{font-size:12px;color:var(--gray);font-weight:300}
+
+/* Team Section */
+.team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:50px;}
+.team-member{
+  background:var(--dark3);
+  padding:30px;
+  text-align:center;
+  border-bottom:3px solid transparent;
+  transition:all .4s;
+}
+.team-member:hover{
+  border-bottom-color:var(--sun);
+  background:var(--dark4);
+  transform:translateY(-3px);
+}
+.tm-img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 20px;
+  border:4px solid var(--sun);
+  filter: brightness(0.8);
+}
+.tm-name{
+  font-family:'Syne',sans-serif;
+  font-size:20px;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:8px;
+}
+.tm-title{
+  font-size:12px;
+  color:var(--sun);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.tm-desc{
+  font-size:13px;
+  color:var(--gray);
+  line-height:1.7;
+  font-weight:300;
+}
+
+/* New Pages Common Styles */
+.content-section {
+    padding: 30px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin-top: 50px;
+}
+.content-section:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+.content-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+.content-section p, .content-section ul, .content-section ol {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    max-width: 800px;
+}
+.content-section ul, .content-section ol {
+    padding-left: 20px;
+}
+.content-section li {
+    margin-bottom: 8px;
+}
+.content-section a {
+    color: var(--sun);
+}
+.blog-post {
+    background: var(--dark3);
+    padding: 30px;
+    border-left: 3px solid transparent;
+    transition: all .4s;
+    margin-bottom: 20px;
+}
+.blog-post:hover {
+    border-left-color: var(--sun);
+    background: var(--dark4);
+}
+.blog-post h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+.blog-post .date {
+    font-size: 11px;
+    color: var(--gray2);
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* PAYMENT */
+.pay-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;max-width:860px;margin:44px auto 0}
+.pw{background:var(--dark3);padding:24px 16px;text-align:center;border-top:2px solid transparent;transition:all .3s}
+.pw:hover{border-top-color:var(--sun);transform:translateY(-3px)}
+.pw-icon{font-size:28px;margin-bottom:8px;color:var(--sun);}
+.pw-name{font-family:'Syne',sans-serif;font-size:13px;color:var(--sun);font-weight:700}
+.pw-desc{font-size:10px;color:var(--gray2);margin-top:2px}
+
+/* LOCATION */
+.loc-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:40px;margin-top:50px;align-items:stretch}
+.loc-info{display:flex;flex-direction:column;gap:2px}
+.loc-frame{overflow:hidden;border:1px solid rgba(255,255,255,.12);min-height:380px}
+.loc-frame iframe{width:100%;height:100%;min-height:380px;border:none;filter:grayscale(.5) brightness(.6) hue-rotate(0deg)}
+
+/* CONTACT STRIP */
+.cstrip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--dark4);border-top:1px solid rgba(255,255,255,.1)}
+.cs{display:flex;align-items:center;gap:16px;padding:28px 5%;border-right:1px solid rgba(255,255,255,.08);text-decoration:none;transition:background .3s}
+.cs:last-child{border-right:none}
+.cs:hover{background:rgba(255,255,255,.04)}
+.cs-icon{font-size:22px;color:var(--sun);}
+.cs-l{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2)}
+.cs-v{font-size:14px;color:var(--white);font-weight:500;margin-top:2px}
+
+/* FLOATS */
+.fls{position:fixed;bottom:26px;right:26px;z-index:800;display:flex;flex-direction:column;gap:10px;align-items:center}
+.fl-wa{width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 24px rgba(37,211,102,.4);animation:wap 2.5s ease infinite;transition:transform .3s}
+.fl-wa:hover{transform:scale(1.1)}
+.fl-call{width:46px;height:46px;border-radius:50%;background:var(--sun);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;box-shadow:0 4px 18px rgba(245,158,11,.4);transition:transform .3s}
+.fl-call:hover{transform:scale(1.1)}
+.fl-msg{ /* New Message Button */
+  width:46px;height:46px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;box-shadow:0 4px 18px rgba(14,165,233,.4);transition:transform .3s;
+}
+.fl-msg:hover{transform:scale(1.1)}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.08);padding:60px 5% 26px;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:50px}
+.f-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.f-logo-icon{font-size:32px;color:var(--sun);}
+.f-logo-text{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:2px;color:var(--white)}
+.f-logo-text span{color:var(--sun)}
+.f-desc{font-size:12px;color:var(--gray);line-height:1.85;margin-bottom:20px;font-weight:300}
+.f-social{display:flex;gap:10px}
+.f-soc{width:36px;height:36px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:all .3s;cursor:pointer;color:var(--white);}
+.f-soc:hover{background:rgba(245,158,11,.15);border-color:var(--sun)}
+.f-head{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--sun);margin-bottom:16px;display:block;font-weight:600}
+.f-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-list a{color:var(--gray);text-decoration:none;font-size:12px;transition:color .3s;font-weight:300}
+.f-list a:hover{color:var(--white)}
+.f-bt{border-top:1px solid rgba(255,255,255,.07);padding:18px 5%;display:flex;justify-content:space-between;font-size:11px;color:var(--gray);background:var(--dark)}
+
+/* SCROLL REVEAL */
+.sr{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.sr.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ANIMATIONS */
+@keyframes tq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes wap{0%,100%{box-shadow:0 4px 24px rgba(37,211,102,.4)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* MODAL */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.mbg.open{display:flex}
+.mbox{background:var(--dark2);border:1px solid rgba(255,255,255,.2);padding:44px;max-width:440px;width:100%;position:relative;animation:slideUp .35s ease;border-top:3px solid var(--sun);text-align:left;}
+.mx{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--gray);font-size:20px;cursor:pointer;transition:color .3s}
+.mx:hover{color:var(--sun)}
+/* Success Modal */
+.success-modal .mbox {
+    background: var(--green);
+    color: var(--dark-bg);
+    text-align: center;
+    border-color: var(--green);
+}
+.success-modal .mbox .eyebrow, .success-modal .mbox #m-title, .success-modal .mbox #m-svc, .success-modal .mbox .mx {
+    color: var(--dark-bg) !important;
+}
+.success-modal .mbox .mx {
+    color: rgba(0,0,0,0.7) !important;
+}
+.success-modal .mbox .mx:hover {
+    color: var(--dark-bg) !important;
+}
+.success-modal .mbox h3 {
+    font-family: 'Syne',sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--dark-bg);
+}
+.success-modal .mbox p {
+    font-size: 16px;
+    color: var(--dark-bg);
+    margin-bottom: 20px;
+}
+
+/* ───── LIVE NOTIFICATIONS ───── */
+.notif-wrap{
+  position:fixed;
+  bottom:40px;left:36px;
+  z-index:100;
+  display:flex;flex-direction:column;gap:10px;
+  max-width:310px;
+}
+.notif{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(12,16,28,0.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.09);
+  border-left:3px solid var(--sun);
+  border-radius:12px;
+  padding:13px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,.45);
+  transform:translateX(-120%);
+  opacity:0;
+  transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .5s ease;
+  pointer-events:none;
+}
+.notif.show{transform:translateX(0);opacity:1;pointer-events:auto}
+.notif-avatar{
+  width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;
+  border:2px solid rgba(245,158,11,.3);
+}
+.notif-body{}
+.notif-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px}
+.notif-msg{font-size:12px;color:var(--gray);line-height:1.5}
+.notif-time{font-size:10px;color:var(--sun);margin-top:5px;letter-spacing:.5px}
+
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .n-links{display:none}
+  .n-actions{flex-wrap:wrap;justify-content:flex-end}
+  .n-search-input{width:100%;margin-top:10px; order:-1;}
+  .hero{min-height:auto;}
+  .hero-l{padding:80px 5% 50px;min-height:auto;}
+  .hero-r{height:300px; padding: 0 5%;}
+  .hig:first-child{grid-row:auto}
+  .hero h1{font-size:clamp(48px,12vw,70px);line-height:1.1;}
+  .hero-p{font-size:clamp(14px,3.5vw,16px);max-width:none;}
+  .svc-grid{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+  .calc-wrap{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gi:first-child,.gi:nth-child(5){grid-column:auto}
+  .test-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .pay-grid{grid-template-columns:repeat(3,1fr)}
+  .loc-grid{grid-template-columns:1fr}
+  .cstrip{grid-template-columns:1fr}
+  .cs{border-right:none;border-bottom:1px solid rgba(245,158,11,.08)}
+  footer{grid-template-columns:1fr 1fr;gap:28px}
+  .frow{grid-template-columns:1fr}
+  .content-section { padding: 20px 0;}
+  .content-section h3 { font-size: 24px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .video-grid {
+    grid-template-columns: 1fr; /* Stack videos on mobile */
+    gap: 20px;
+  }
+  .notif-wrap{left:10px;bottom:10px;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="l-icon">☀️</div>
+  <div class="l-name">CITY OF SAINTS SOLAR</div>
+  <div class="l-sub">MULTAN'S #1 SOLAR COMPANY</div>
+  <div class="l-bar"><div class="l-fill"></div></div>
+</div>
+
+<div id="cur"></div><div id="cur-r"></div>
+
+<div class="topbar">☀️ Multan's Premier Solar Company — Free Site Survey | 10 Year Warranty | Call: 0318-4195665</div>
+
+<nav>
+  <div class="n-logo">
+    <div class="n-logo-icon">⚡</div>
+    <div class="n-logo-text">CITY OF SAINTS <span>SOLAR</span></div>
+  </div>
+  <ul class="n-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('about')">About Us</a></li>
+    <li><a href="#" onclick="showPage('services')">Services</a></li>
+    <li><a href="#" onclick="showPage('products')">Products</a></li>
+    <li><a href="#" onclick="showPage('projects')">Projects</a></li>
+    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+    <li><a href="#" onclick="showPage('faq')">FAQ</a></li>
+  </ul>
+  <div class="n-actions">
+    <input type="text" class="n-search-input" placeholder="Search..." id="n-search">
+    <a href="tel:03184195665" class="n-call">📞 Call Now</a>
+    <button class="n-cta" onclick="showPage('book-quote')">Get Free Quote</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+
+<section class="hero">
+  <div class="hero-l">
+    <div class="hero-bg-glow"></div>
+    <div style="position:relative;z-index:2">
+      <div class="hero-tag">☀️ Multan's Premier Solar Company · Since 2015</div>
+      <h1>Power Your<br>Future With<br><span>Solar Energy</span></h1>
+      <p class="hero-p">Discover Multan's leading solar solutions — On-Grid, Off-Grid, and Hybrid systems. Achieve zero electricity bills and embrace clean energy. Benefit from our free site survey and *on-site installation guarantee*.</p>
+      <div class="hero-btns">
+        <button class="btn-sun" onclick="showPage('book-quote')">Get Free Quote</button>
+        <a href="https://wa.me/923188791637?text=Hi! I want a free solar quote from City of Saints Solar" class="btn-wa" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Us
+        </a>
+        <a href="tel:03184195665" class="btn-ghost">📞 Call Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-n">500+</div><div class="hs-l">Installations</div></div>
+        <div class="hs"><div class="hs-n">10yr</div><div class="hs-l">Warranty</div></div>
+        <div class="hs"><div class="hs-n">98%</div><div class="hs-l">Satisfaction</div></div>
+        <div class="hs"><div class="hs-n">0</div><div class="hs-l">Bill Target</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-slideshow" id="hero-slideshow">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80" alt="Solar Rooftop">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Residential Solar Solutions <span>Tier-1 Panels</span></div></div>
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1497435334941-8c899a9bd656?w=800&q=80" alt="Commercial Solar">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Commercial Solar Projects <span>Maximize Savings</span></div></div>
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1548613053-22087dd8edb8?w=800&q=80" alt="Industrial Solar">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Industrial Scale Power <span>Reliable Performance</span></div></div>
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80" alt="Solar Farm">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Utility Scale Installations <span>High Efficiency</span></div></div>
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1562408590-e32931084e23?w=800&q=80" alt="Ground Mount">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Robust Ground Mounting <span>Durable Structures</span></div></div>
+      </div>
+       <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1629707920392-411a7f6c6f72?w=800&q=80" alt="Hybrid System">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Advanced Hybrid Systems <span>Seamless Power</span></div></div>
+      </div>
+       <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1616712134411-d009b199049f?w=800&q=80" alt="Smart Energy">
+        <div class="hero-slide-overlay"><div class="hero-slide-text">Smart Energy Management <span>Integrated Solutions</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>  
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ti"><div class="td"></div>On-Grid Systems</div>
+    <div class="ti"><div class="td"></div>Off-Grid Systems</div>
+    <div class="ti"><div class="td"></div>Hybrid Systems</div>
+    <div class="ti"><div class="td"></div>Free Site Survey</div>
+    <div class="ti"><div class="td"></div>10 Year Warranty</div>
+    <div class="ti"><div class="td"></div>Zero Electricity Bill</div>
+    <div class="ti"><div class="td"></div>Multan's #1 Solar</div>
+    <div class="ti"><div class="td"></div>500+ Installations</div>
+    <div class="ti"><div class="td"></div>On-Grid Systems</div>
+    <div class="td"></div>Off-Grid Systems</div>
+    <div class="ti"><div class="td"></div>Hybrid Systems</div>
+    <div class="ti"><div class="td"></div>Free Site Survey</div>
+    <div class="ti"><div class="td"></div>10 Year Warranty</div>
+    <div class="ti"><div class="td"></div>Zero Electricity Bill</div>
+    <div class="ti"><div class="td"></div>Multan's #1 Solar</div>
+    <div class="ti"><div class="td"></div>500+ Installations</div>
+  </div>
+</div>
+
+<!-- LIVE NOTIFICATIONS -->
+<div class="notif-wrap" id="notifWrap"></div>
+
+
+<!-- FEATURED VIDEO SECTION (MODIFIED FOR TWO VIDEOS) -->
+<section class="sec">
+  <div style="text-align:center;margin-bottom:50px;" class="sr">
+    <span class="eyebrow">✦ Our Vision in Motion</span>
+    <h2 class="sec-title">Powering Multan, One <span>Panel at a Time</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Watch our installations, explore our technology, and hear stories from our happy clients.</p>
+  </div>
+  <div class="video-grid">
+    <div class="video-wrapper sr">
+      <iframe src="https://www.youtube.com/embed/EaK5y03b_2Q?si=0F-iXwI09QW2r6q2" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-wrapper sr d1">
+      <iframe src="https://www.youtube.com/embed/p17691aFw-k?si=1m18n_vX8D-8i3yV" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- BRANDS/PARTNERS TICKER -->
+<section class="sec sec-alt2">
+  <div style="text-align:center;margin-bottom:30px;" class="sr">
+    <span class="eyebrow">✦ Our Partners</span>
+    <h2 class="sec-title">Trusted Brands We <span>Install</span></h2>
+  </div>
+  <div class="brand-ticker">
+    <div class="brand-track">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Growatt" alt="Growatt Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Solis" alt="Solis Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Huawei" alt="Huawei Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Jinko+Solar" alt="Jinko Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Canadian+Solar" alt="Canadian Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Longi+Solar" alt="Longi Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=JA+Solar" alt="JA Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Trina+Solar" alt="Trina Solar Logo" class="brand-logo">
+      <!-- Duplicate for seamless scroll -->
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Growatt" alt="Growatt Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Solis" alt="Solis Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Huawei" alt="Huawei Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Jinko+Solar" alt="Jinko Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Canadian+Solar" alt="Canadian Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Longi+Solar" alt="Longi Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=JA+Solar" alt="JA Solar Logo" class="brand-logo">
+      <img src="https://via.placeholder.com/120x60/30305D/A0A0B0?text=Trina+Solar" alt="Trina Solar Logo" class="brand-logo">
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="sec sec-alt">
+  <div class="sr" style="text-align:center;margin-bottom:50px">
+    <span class="eyebrow">✦ Why Choose Us</span>
+    <h2 class="sec-title">Multan's Most <span>Trusted</span> Solar Company</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card sr"><div class="why-icon">🏆</div><div class="why-title">10 Year Warranty</div><div class="why-desc">Comprehensive system warranty — panels, inverter, and installation included</div></div>
+    <div class="why-card sr d1"><div class="why-icon">🆓</div><div class="why-title">Free Site Survey</div><div class="why-desc">Our expert team will visit your location for a completely free assessment</div></div>
+    <div class="why-card sr d2"><div class="why-icon">⚡</div><div class="why-title">Fast Installation</div><div class="why-desc">Complete installation within 2-3 days — with minimal disruption</div></div>
+    <div class="why-card sr d3"><div class="why-icon">💰</div><div class="why-title">Best Prices</div><div class="why-desc">The most competitive prices in Multan — without compromising on quality</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS PREVIEW -->
+<section class="sec">
+  <div class="sr" style="text-align:center;margin-bottom:50px">
+    <span class="eyebrow">✦ Client Reviews</span>
+    <h2 class="sec-title">What Our <span>Clients Say</span></h2>
+  </div>
+  <div class="test-grid">
+    <div class="tc sr"><div class="tc-stars">★★★★★</div><div class="tc-date">March 2025</div><p class="tc-text">"My electricity bill reduced from PKR 8,000 to zero. Best investment! City of Saints Solar installed everything in 3 days."</p><div class="tc-auth"><div class="tc-av">A</div><div><div class="tc-name">Ahmad Raza</div><div class="tc-loc">Gulgasht Colony, Multan</div></div></div></div>
+    <div class="tc sr d1"><div class="tc-stars">★★★★★</div><div class="tc-date">Feb 2025</div><p class="tc-text">"My factory's monthly bill was PKR 50,000. Now it's just maintenance costs. ROI recovered in 18 months!"</p><div class="tc-auth"><div class="tc-av">M</div><div><div class="tc-name">Muhammad Saleem</div><div class="tc-loc">SITE Area, Multan</div></div></div></div>
+    <div class="tc sr d2"><div class="tc-stars">★★★★★</div><div class="tc-date">Jan 2025</div><p class="tc-text">"Professional team, quality panels, and a 10-year warranty. This is the best solar company in Multan. Highly recommended!"</p><div class="tc-auth"><div class="tc-av">U</div><div><div class="tc-name">Usman Khan</div><div class="tc-loc">Model Town, Multan</div></div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:30px"><button class="btn-ghost" onclick="showPage('testimonials')">View All Reviews →</button></div>
+</section>
+
+</div><!-- END HOME -->
+
+<!-- ===== SERVICES PAGE ===== -->
+<div id="page-services" class="page">
+<section class="sec sec-bg-services">
+  <div class="sr">
+    <span class="eyebrow">✦ Our Services</span>
+    <h2 class="sec-title">Complete Solar <span>Solutions</span></h2>
+    <p class="sec-sub">From residential to industrial — perfect solar solutions for every scale</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card sr" onclick="openModal('On-Grid System Quote')"><div class="svc-icon">🔆</div><div class="svc-name">On-Grid System</div><div class="svc-desc">A grid-connected system — sell excess electricity back to the grid and achieve zero bills. Ideal for areas with stable grid supply.</div><div class="svc-tag">Most Popular</div></div>
+    <div class="svc-card sr d1" onclick="openModal('Off-Grid System Quote')"><div class="svc-icon">🔋</div><div class="svc-name">Off-Grid System</div><div class="svc-desc">A completely independent system with battery backup — no reliance on grid power. Best for areas with frequent load shedding.</div><div class="svc-tag">No Load Shedding</div></div>
+    <div class="svc-card sr d2" onclick="openModal('Hybrid System Quote')"><div class="svc-icon">⚡</div><div class="svc-name">Hybrid System</div><div class="svc-desc">The best of both worlds — grid-connected with battery backup. Solar by day, battery or grid by night.</div><div class="svc-tag">Best Value</div></div>
+    <div class="svc-card sr" onclick="openModal('Residential Solar Quote')"><div class="svc-icon">🏠</div><div class="svc-name">Residential Solar</div><div class="svc-desc">Systems from 3kW to 20kW for homes. Complete installation with a 10-year warranty.</div><div class="svc-tag">For Homes</div></div>
+    <div class="svc-card sr d1" onclick="openModal('Commercial Solar Quote')"><div class="svc-icon">🏢</div><div class="svc-name">Commercial Solar</div><div class="svc-desc">Systems from 20kW to 100kW for offices, shops, and plazas. Maximize business savings.</div><div class="svc-tag">For Business</div></div>
+    <div class="svc-card sr d2" onclick="openModal('Industrial Solar Quote')"><div class="svc-icon">🏭</div><div class="svc-name">Industrial Solar</div><div class="svc-desc">Systems of 100kW+ for factories. Guaranteed massive electricity cost reduction.</div><div class="svc-tag">For Industries</div></div>
+    <div class="svc-card sr" onclick="openModal('Solar Water Pump Quote')"><div class="svc-icon">💧</div><div class="svc-name">Solar Water Pump</div><div class="svc-desc">Solar water pumps for agriculture — eliminate diesel expenses.</div><div class="svc-tag">For Farmers</div></div>
+    <div class="svc-card sr d1" onclick="openModal('Solar Street Light Quote')"><div class="svc-icon">💡</div><div class="svc-name">Solar Street Lights</div><div class="svc-desc">Solar street lighting solutions for housing societies and roads.</div><div class="svc-tag">For Societies</div></div>
+    <div class="svc-card sr d2" onclick="openModal('AMC Service Quote')"><div class="svc-icon">🔧</div><div class="svc-name">AMC & Maintenance</div><div class="svc-desc">Annual maintenance contracts — cleaning, monitoring, repair. Keep your system at peak performance.</div><div class="svc-tag">After Sales</div></div>
+  </div>
+
+  <!-- Detailed Service Sub-sections -->
+  <div class="content-section sr">
+    <h3>Residential Solar Solutions</h3>
+    <p>Power your home with solar energy. Our residential solar solutions free you from high electricity bills and reduce your carbon footprint. We design and install customized systems according to your needs, ranging from 3kW to 20kW.</p>
+    <ul>
+      <li>**Complete System Design:** Customized plan after a free site survey.</li>
+      <li>**High-Efficiency Panels:** Tier-1 solar panels that generate more electricity.</li>
+      <li>**Reliable Inverters:** World-class inverters for long-lasting performance.</li>
+      <li>**Battery Backup Options:** Advanced lithium batteries for off-grid or hybrid systems.</li>
+      <li>**Net Metering Assistance:** Full support for WAPDA net metering approval.</li>
+    </ul>
+    <p>Our 10-year warranty and excellent after-sales support provide you with peace of mind.</p>
+  </div>
+  <div class="content-section sr">
+    <h3>Commercial & Industrial Solar</h3>
+    <p>For businesses and factories, solar energy is not just eco-friendly but also a smart financial investment. Our commercial and industrial solar systems significantly reduce your operating costs, increase profitability, and provide energy independence.</p>
+    <ul>
+      <li>**Large-Scale Installations:** Projects from 20kW to MW level.</li>
+      <li>**Energy Audits:** Customized solutions based on your specific energy consumption.</li>
+      <li>**Quick ROI:** Recover your investment quickly.</li>
+      <li>**Reduced Operational Costs:** Eliminate reliance on diesel generators.</li>
+      <li>**Sustainable Business Image:** Enhance your brand image by using green energy.</li>
+    </ul>
+    <p>We understand your business's unique requirements and provide the most beneficial solution.</p>
+  </div>
+</section>
+</div>
+
+<!-- ===== PRODUCTS PAGE ===== -->
+<div id="page-products" class="page">
+<section class="sec sec-bg-products">
+  <div class="sr">
+    <span class="eyebrow">✦ Our Products</span>
+    <h2 class="sec-title">Premium Solar <span>Products</span></h2>
+    <p class="sec-sub">Certified, warranty-backed products from world's leading brands</p>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card sr" onclick="openModal('Solar Panel Inquiry')"><div class="prod-icon">🔆</div><div class="prod-name">Solar Panels</div><div class="prod-desc">Mono PERC, Bifacial, Half-Cut technology. 550W-670W capacity. Tier-1 brands.</div><div class="prod-price">From PKR 12,000/panel</div></div>
+    <div class="prod-card sr d1" onclick="openModal('Inverter Inquiry')"><div class="prod-icon">🔌</div><div class="prod-name">Solar Inverters</div><div class="prod-desc">Growatt, Solis, Huawei, SolarEdge. String, hybrid, micro inverters available.</div><div class="prod-price">From PKR 45,000</div></div>
+    <div class="prod-card sr d2" onclick="openModal('Battery Inquiry')"><div class="prod-icon">🔋</div><div class="prod-name">Lithium Batteries</div><div class="prod-desc">LiFePO4 technology. 5kWh-20kWh. 6000+ cycle life. BMS protected.</div><div class="prod-price">From PKR 120,000</div></div>
+    <div class="prod-card sr d3" onclick="openModal('Structure Inquiry')"><div class="prod-icon">🏗️</div><div class="prod-name">Mounting Structure</div><div class="prod-desc">Galvanized steel, aluminum structures. Roof, ground, carport mounting.</div><div class="prod-price">Included in Package</div></div>
+  </div>
+  <!-- Detailed Product Sub-sections -->
+  <div class="content-section sr">
+    <h3>Solar Panels: Technology & Brands</h3>
+    <p>We provide certified solar panels only from the world's top-tier manufacturers. Our panels are made with the latest technology (Mono PERC, Bifacial, Half-Cut), offering higher efficiency and durability, especially suitable for hot regions like Multan.</p>
+    <ul>
+      <li>**Jinko Solar:** Global leader in solar panel manufacturing.</li>
+      <li>**Longi Solar:** High-performance mono-crystalline modules.</li>
+      <li>**Canadian Solar:** Reliable and robust solar solutions.</li>
+      <li>**Trina Solar:** Pioneering smart PV energy solutions.</li>
+      <li>**JA Solar:** High-efficiency products with excellent reliability.</li>
+    </ul>
+    <p>Each panel comes with a power output warranty of up to 25 years.</p>
+  </div>
+  <div class="content-section sr">
+    <h3>Solar Inverters: The Brain of Your System</h3>
+    <p>The inverter is the most crucial part of a solar system, converting DC current into AC current. We offer various types of inverters perfect for every system type (On-Grid, Off-Grid, Hybrid), and they also include smart monitoring features.</p>
+    <ul>
+      <li>**Growatt:** Industry leader for residential and commercial inverters.</li>
+      <li>**Solis:** High-efficiency and reliable string inverters.</li>
+      <li>**Huawei:** Smart PV solutions with AI integration.</li>
+      <li>**SolarEdge:** Optimized inverter solutions for maximum energy production.</li>
+    </ul>
+    <p>Choose the best inverter according to your needs; our experts are available to assist you.</p>
+  </div>
+  <div class="content-section sr">
+    <h3>Lithium-Ion Batteries: Power Backup Solutions</h3>
+    <p>For off-grid and hybrid solar systems, reliable battery storage is essential. We only provide the latest LiFePO4 (Lithium Iron Phosphate) batteries, which offer better cycle life, safety, and efficiency compared to older lead-acid batteries.</p>
+    <ul>
+      <li>**High Cycle Life:** 6000+ discharge cycles.</li>
+      <li>**Integrated BMS:** Battery Management System for safety and optimal performance.</li>
+      <li>**Scalable Solutions:** Capacities from 5kWh to 20kWh, which can be expanded according to your needs.</li>
+      <li>**Long Lifespan:** Up to 10 years warranty.</li>
+    </ul>
+    <p>Maintain continuous power supply even during load shedding.</p>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="sec sec-alt">
+  <div class="sr" style="text-align:center;margin-bottom:50px">
+    <span class="eyebrow">✦ Solar Packages</span>
+    <h2 class="sec-title">Ready-Made <span>Packages</span></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:0">
+    <div class="svc-card sr" style="text-align:center" onclick="openModal('3kW Package Quote')">
+      <div class="svc-icon">🏠</div>
+      <div class="svc-name">3kW Package</div>
+      <div class="svc-desc">Small home — powers 3-4 ACs. Reduces monthly bill to PKR 0-2,000</div>
+      <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--sun);font-weight:800;margin:10px 0">PKR 4.5 Lac</div>
+      <div class="svc-tag">For Small Homes</div>
+    </div>
+    <div class="svc-card sr d1" style="text-align:center;border-top-color:var(--sun);background:var(--dark4)" onclick="openModal('5kW Package Quote')">
+      <div class="svc-icon">🏡</div>
+      <div class="svc-name">5kW Package ⭐</div>
+      <div class="svc-desc">Medium home — powers 5-6 ACs. Our most popular package in Multan!</div>
+      <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--sun);font-weight:800;margin:10px 0">PKR 7 Lac</div>
+      <div class="svc-tag">Most Popular</div>
+    </div>
+    <div class="svc-card sr d2" style="text-align:center" onclick="openModal('10kW Package Quote')">
+      <div class="svc-icon">🏘️</div>
+      <div class="svc-name">10kW Package</div>
+      <div class="svc-desc">Large home/small business — complete electricity freedom</div>
+      <div style="font-family:'Syne',sans-serif;font-size:28px;color:var(--sun);font-weight:800;margin:10px 0">PKR 13 Lac</div>
+      <div class="svc-tag">For Large Homes</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT METHODS -->
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Easy Payment</span>
+    <h2 class="sec-title">Payment <span>Options</span></h2>
+  </div>
+  <div class="pay-grid">
+    <div class="pw sr"><div class="pw-icon">💵</div><div class="pw-name">Cash</div><div class="pw-desc">Full payment</div></div>
+    <div class="pw sr d1"><div class="pw-icon">🏦</div><div class="pw-name">Bank Transfer</div><div class="pw-desc">All major banks</div></div>
+    <div class="pw sr d2"><div class="pw-icon">📱</div><div class="pw-name">JazzCash</div><div class="pw-desc">Mobile wallet</div></div>
+    <div class="pw sr d1"><div class="pw-icon">💚</div><div class="pw-name">EasyPaisa</div><div class="pw-desc">Digital transfer</div></div>
+    <div class="pw sr d2"><div class="pw-icon">📋</div><div class="pw-name">Installments</div><div class="pw-desc">Easy monthly plan</div></div>
+  </div>
+</section>
+</div>
+
+<!-- ===== PROJECTS PAGE ===== -->
+<div id="page-projects" class="page">
+<section class="sec">
+  <div class="sr">
+    <span class="eyebrow">✦ Completed Projects</span>
+    <h2 class="sec-title">Our <span>Installations</span></h2>
+    <p class="sec-sub">Over 500 successful solar installations across Multan and South Punjab</p>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card sr"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80" alt="Project"><div class="proj-ov"><div class="proj-loc">📍 Model Town, Multan</div><div class="proj-name">Residential 5kW System</div><div class="proj-kw">On-Grid · Installed 2024</div></div></div>
+    <div class="proj-card sr d1"><img src="https://media.istockphoto.com/id/1756791456/photo/young-homeowners-installing-solar-panels-on-a-suburban-western-usa-home.jpg?s=2048x2048&w=is&k=20&c=sDHB3q2qKOQSxk9yWqwJFgba6ehd5dc9Z20Ec3hz_80="alt="Project3"><div class="proj-ov"><div class="proj-loc">📍 Multan 2024</div><div class="proj-name">Commercial 20kW System</div><div class="proj-kw">On-Grid · Installed 2023</div></div></div>
+    <div class="proj-card sr d2"><img src="https://images.unsplash.com/photo-1548613053-22087dd8edb8?w=600&q=80" alt="Project3"><div class="proj-ov"><div class="proj-loc">📍 Gulgasht Colony</div><div class="proj-name">Commercial 20kW System</div><div class="proj-kw">On-Grid · Installed 2023</div></div></div>
+    <div class="proj-card sr"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80" alt="Project4"><div class="proj-ov"><div class="proj-loc">📍 Bosan Road, Multan</div><div class="proj-name">Residential 10kW System</div><div class="proj-kw">Off-Grid · Installed 2023</div></div></div>
+    <div class="proj-card sr d1"><img src="https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&q=80" alt="Project5"><div class="proj-ov"><div class="proj-loc">📍 Shah Rukn-e-Alam</div><div class="proj-name">Mosque 15kW System</div><div class="proj-kw">On-Grid · Installed 2023</div></div></div>
+    <div class="proj-card sr d2"><img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&q=80" alt="Project6"><div class="proj-ov"><div class="proj-loc">📍 DHA Multan</div><div class="proj-name">Villa 8kW Hybrid System</div><div class="proj-kw">Hybrid · Installed 2024</div></div></div>
+  </div>
+  <!-- More Project Categories -->
+  <div class="content-section sr">
+    <h3>Residential Project Highlights</h3>
+    <p>Explore more images of our residential solar installations, featuring work on various homes and roof types across Multan.</p>
+    <!-- Add more specific residential images here if needed -->
+  </div>
+  <div class="content-section sr">
+    <h3>Commercial & Industrial Success Stories</h3>
+    <p>Get inspired for your business. View images of our commercial and industrial solar projects, including shops, offices, and small factories.</p>
+    <p>Read more about our business solutions on the <a href="#" onclick="showPage('services')" style="color:var(--sun); text-decoration:none;">Services page</a>.</p>
+  </div>
+</section>
+</div>
+
+<!-- ===== CALCULATOR PAGE ===== -->
+<div id="page-calculator" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Solar Calculator</span>
+    <h2 class="sec-title">Calculate Your <span>Savings</span></h2>
+    <p class="sec-sub">Enter your details and see exactly how much you'll save with solar</p>
+  </div>
+  <div class="calc-wrap">
+    <div class="calc-form sr">
+      <div class="calc-title">Enter Your Details</div>
+      <div class="calc-sub">Fill in your monthly electricity usage</div>
+      <input type="number" class="fi" placeholder="Monthly Electricity Bill (PKR)" id="c-bill">
+      <input type="number" class="fi" placeholder="Monthly Units (kWh)" id="c-units">
+      <select class="fs" id="c-type">
+        <option value="">Property Type</option>
+        <option value="residential">Residential Home</option>
+        <option value="commercial">Commercial / Office</option>
+        <option value="industrial">Industrial / Factory</option>
+        <option value="agriculture">Agriculture / Farm</option>
+      </select>
+      <select class="fs" id="c-system">
+        <option value="">Preferred System</option>
+        <option value="ongrid">On-Grid (Zero Bill)</option>
+        <option value="offgrid">Off-Grid (No Grid Reliance)</option>
+        <option value="hybrid">Hybrid (Best of Both)</option>
+      </select>
+      <button class="btn-sun-full" onclick="calcSavings()">Calculate My Savings ⚡</button>
+      <button class="btn-wa-full" onclick="window.open('https://wa.me/923188791637?text=Hi! I want to know my solar savings from City of Saints Solar','_blank')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Get Expert Advice on WhatsApp
+      </button>
+    </div>
+    <div class="calc-result sr d2" id="calc-result">
+      <div class="calc-result-title">⚡ Your Estimated Savings</div>
+      <div class="calc-item"><span class="ci-label">Monthly Savings</span><span class="ci-val" id="r-monthly">Enter bill →</span></div>
+      <div class="calc-item"><span class="ci-label">Yearly Savings</span><span class="ci-val" id="r-yearly">—</span></div>
+      <div class="calc-item"><span class="ci-label">Recommended System</span><span class="ci-val" id="r-system">—</span></div>
+      <div class="calc-item"><span class="ci-label">Estimated Cost</span><span class="ci-val" id="r-cost">—</span></div>
+      <div class="calc-item"><span class="ci-label">ROI Period</span><span class="ci-val" id="r-roi">—</span></div>
+      <div class="calc-item"><span class="ci-label">25 Year Total Saving</span><span class="ci-val" id="r-total">—</span></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== GALLERY PAGE ===== -->
+<div id="page-gallery" class="page">
+<section class="sec">
+  <div class="sr">
+    <span class="eyebrow">✦ Photo Gallery</span>
+    <h2 class="sec-title">Installation <span>Gallery</span></h2>
+    <p class="sec-sub">Real installations by our expert team across Multan and South Punjab</p>
+  </div>
+  <div class="gal-grid">
+    <div class="gi sr"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&q=80" alt="Gallery"><div class="gi-ov"><div class="gi-tag">Rooftop Installation</div></div></div>
+    <div class="gi sr d1"><img src="https://images.unsplash.com/photo-1497435334941-8c899a9bd656?w=500&q=80" alt="Gallery2"><div class="gi-ov"><div class="gi-tag">Industrial Solar</div></div></div>
+    <div class="gi sr d2"><img src="https://images.unsplash.com/photo-1548613053-22087dd8edb8?w=500&q=80" alt="Gallery3"><div class="gi-ov"><div class="gi-tag">Commercial Setup</div></div></div>
+    <div class="gi sr"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=500&q=80" alt="Gallery4"><div class="gi-ov"><div class="gi-tag">Ground Mount</div></div></div>
+    <div class="gi sr d1"><img src="https://images.unsplash.com/photo-1562408590-e32931084e23?w=700&q=80" alt="Gallery5"><div class="gi-ov"><div class="gi-tag">Solar Farm</div></div></div>
+    <div class="gi sr d2"><img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=500&q=80" alt="Gallery6"><div class="gi-ov"><div class="gi-tag">Residential Solar</div></div></div>
+  </div>
+  <!-- More detailed galleries -->
+  <div class="content-section sr">
+    <h3>Residential Solar Gallery</h3>
+    <p>View more images of our residential solar installations, featuring various homes and roof types.</p>
+    <!-- Add more specific residential images here if needed -->
+  </div>
+  <div class="content-section sr">
+    <h3>Commercial Solar Gallery</h3>
+    <p>Find inspiration for your business. Explore images of our commercial solar projects, including shops, offices, and small factories.</p>
+    <!-- Add more specific commercial images here if needed -->
+  </div>
+</section>
+</div>
+
+<!-- ===== TESTIMONIALS PAGE ===== -->
+<div id="page-testimonials" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center;margin-bottom:50px">
+    <span class="eyebrow">✦ Client Reviews</span>
+    <h2 class="sec-title">500+ Happy <span>Clients</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Our trusted network across Multan and South Punjab</p>
+  </div>
+  <div class="test-grid">
+    <div class="tc sr"><div class="tc-stars">★★★★★</div><div class="tc-date">March 2025</div><p class="tc-text">"My electricity bill reduced from PKR 8,000 to zero! Best investment of my life. Professional team, fast installation."</p><div class="tc-auth"><div class="tc-av">A</div><div><div class="tc-name">Ahmad Raza</div><div class="tc-loc">Gulgasht Colony</div></div></div></div>
+    <div class="tc sr d1"><div class="tc-stars">★★★★★</div><div class="tc-date">Feb 2025</div><p class="tc-text">"My factory's PKR 50,000 bill is now almost zero. ROI recovered in 18 months. Amazing service!"</p><div class="tc-auth"><div class="tc-av">M</div><div><div class="tc-name">Muhammad Saleem</div><div class="tc-loc">SITE Area, Multan</div></div></div></div>
+    <div class="tc sr d2"><div class="tc-stars">★★★★★</div><div class="tc-date">Jan 2025</div><p class="tc-text">"Professional team, quality equipment, 10-year warranty. The best solar company in Multan!"</p><div class="tc-auth"><div class="tc-av">U</div><div><div class="tc-name">Usman Khan</div><div class="tc-loc">Model Town</div></div></div></div>
+    <div class="tc sr"><div class="tc-stars">★★★★★</div><div class="tc-date">Dec 2024</div><p class="tc-text">"Achieved complete freedom from load shedding. The off-grid system is absolutely perfect!"</p><div class="tc-auth"><div class="tc-av">H</div><div><div class="tc-name">Hassan Ali</div><div class="tc-loc">Bosan Road</div></div></div></div>
+    <div class="tc sr d1"><div class="tc-stars">★★★★★</div><div class="tc-date">Nov 2024</div><p class="tc-text">"Installed an agriculture pump — diesel expenses eliminated! I am very happy."</p><div class="tc-auth"><div class="tc-av">F</div><div><div class="tc-name">Farmer Bashir</div><div class="tc-loc">Muzaffargarh</div></div></div></div>
+    <div class="tc sr d2"><div class="tc-stars">★★★★★</div><div class="tc-date">Oct 2024</div><p class="tc-text">"8kW hybrid system installed on my DHA property — perfect! The team was very professional."</p><div class="tc-auth"><div class="tc-av">K</div><div><div class="tc-name">Kamran Malik</div><div class="tc-loc">DHA Multan</div></div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:30px">
+    <button class="btn-ghost" onclick="openModal('Submit a Review')">Submit Your Review →</button>
+  </div>
+</section>
+</div>
+
+<!-- ===== ABOUT PAGE ===== -->
+<div id="page-about" class="page">
+<section class="sec">
+  <div class="sr">
+    <span class="eyebrow">✦ About Us</span>
+    <h2 class="sec-title">City of Saints <span>Solar</span></h2>
+    <p class="sec-sub">Multan's most trusted solar company — with quality, reliability, and innovation</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-img sr">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&q=80" alt="About">
+      <div class="about-badge"><div class="ab-num">10+</div><div class="ab-txt-badge">Years of Excellence</div></div>
+    </div>
+    <div class="about-txt sr d2">
+      <span class="eyebrow">✦ Our Story</span>
+      <h3 style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);margin-bottom:14px">Our Mission: Making Multan a Solar <span style="color:var(--sun)">Champion</span></h3>
+      <p style="font-size:13px;color:var(--gray);line-height:1.85;margin-bottom:24px;font-weight:300">City of Saints Solar is Multan's leading solar energy company, providing clean and affordable electricity since 2015. We offer world-class solar solutions to residential, commercial, and industrial clients, including on-grid, off-grid, and hybrid systems. Our goal is to free the people of Multan and South Punjab from high electricity bills and load shedding, guiding them towards a future of clean energy. We don't just install solar panels; we provide you with a brighter future where you generate your own electricity and contribute to a healthier environment. Every installation is supervised by our skilled engineers, ensuring quality and safety.</p>
+      <div class="at-stat"><div class="at-stat-n">500+</div><div class="at-stat-l">Successful installations across South Punjab</div></div>
+      <div class="at-stat"><div class="at-stat-n">10yr</div><div class="at-stat-l">Complete system warranty on all installations</div></div>
+      <div class="at-stat"><div class="at-stat-n">98%</div><div class="at-stat-l">Customer satisfaction rate</div></div>
+      <div class="at-stat"><div class="at-stat-n">24/7</div><div class="at-stat-l">After-sales support and maintenance</div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:80px; text-align:center;" class="sr">
+    <span class="eyebrow">✦ Our Vision & Mission</span>
+    <h3 class="sec-title">Bright Future for <span>Multan</span></h3>
+    <p class="sec-sub" style="margin:0 auto;">Our vision is to make Multan the solar hub of Pakistan by providing accessible, affordable, and sustainable energy solutions. We strive for excellence in every project, ensuring our clients enjoy uninterrupted power and significant savings.</p>
+    <div class="content-section sr">
+        <h3>Our Values</h3>
+        <ul style="max-width:800px; margin:0 auto; text-align:left;">
+            <li>**Customer Focus:** Client satisfaction is our top priority.</li>
+            <li>**Innovation:** Embracing the latest solar technologies.</li>
+            <li>**Integrity:** Honesty and transparency in all our work.</li>
+            <li>**Sustainability:** Providing eco-friendly solutions.</li>
+            <li>**Quality Excellence:** Delivering the best products and services.</li>
+        </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:80px; text-align:center;" class="sr">
+    <span class="eyebrow">✦ Our Leadership</span>
+    <h2 class="sec-title">Meet Our <span>Team</span></h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-member sr">
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="CEO" class="tm-img">
+      <h3 class="tm-name">Mr. Shahbaz Khan</h3>
+      <div class="tm-title">CEO & Founder</div>
+      <p class="tm-desc">A visionary leader with over 15 years of experience in renewable energy. Drives the company's mission to power Multan with solar.</p>
+    </div>
+    <div class="team-member sr d1">
+      <img src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=400&q=80" alt="Manager" class="tm-img">
+      <h3 class="tm-name">Ms. Ayesha Siddiqa</h3>
+      <div class="tm-title">Operations Manager</div>
+      <p class="tm-desc">Manages daily operations and ensures seamless project execution and customer satisfaction.</p>
+    </div>
+    <div class="team-member sr d2">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&auto=format&fit=crop&q=60" alt="Engineer" class="tm-img">
+      <h3 class="tm-name">Engr. Ali Raza</h3>
+      <div class="tm-title">Lead Solar Engineer</div>
+      <p class="tm-desc">Our lead engineer, responsible for innovative system designs and ensuring high efficiency installations.</p>
+    </div>
+    <div class="team-member sr">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&auto=format&fit=crop&q=60" alt="Sales" class="tm-img">
+      <h3 class="tm-name">Mr. Danish Ahmed</h3>
+      <div class="tm-title">Sales & Marketing Head</div>
+      <p class="tm-desc">Expert in customer relations, helping clients find the perfect solar solution for their needs and budget.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== CONTACT PAGE ===== -->
+<div id="page-contact" class="page">
+<section class="sec">
+  <div class="sr">
+    <span class="eyebrow">✦ Get In Touch</span>
+    <h2 class="sec-title">Contact <span>Us</span></h2>
+    <p class="sec-sub">Contact us for a free site survey — our team will visit you</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info sr">
+      <a href="tel:03184195665" class="ci-card"><div class="ci-icon">📞</div><div><div class="ci-label">Phone & WhatsApp</div><div class="ci-val">0318-4195665</div></div></a>
+      <a href="https://wa.me/923188791637" class="ci-card" target="_blank"><div class="ci-icon">💬</div><div><div class="ci-label">WhatsApp</div><div class="ci-val">0318-8791637</div></div></a>
+      <div class="ci-card"><div class="ci-icon">📍</div><div><div class="ci-label">Office Address</div><div class="ci-val">Multan, Pakistan</div></div></div>
+      <div class="ci-card"><div class="ci-icon">⏰</div><div><div class="ci-label">Working Hours</div><div class="ci-val">Mon–Sat: 9 AM – 6 PM</div></div></div>
+      <div class="ci-card"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-val">info@cityofsaintssolar.com</div></div></div>
+    </div>
+    <div class="contact-form sr d2">
+      <div class="cf-title">Send Us a Message</div>
+      <div class="cf-sub">We'll respond within 2 hours</div>
+      <input type="text" class="fi" placeholder="Your Name *" id="cn">
+      <input type="text" class="fi" placeholder="Phone Number *" id="cph">
+      <select class="fs" id="cservice">
+        <option value="">Select Service</option>
+        <option>On-Grid System</option>
+        <option>Off-Grid System</option>
+        <option>Hybrid System</option>
+        <option>Residential Solar</option>
+        <option>Commercial Solar</option>
+        <option>Industrial Solar</option>
+        <option>Solar Water Pump</option>
+        <option>Maintenance / AMC</option>
+        <option>General Inquiry</option>
+      </select>
+      <input type="text" class="fi" placeholder="Your Location / Area" id="cloc">
+      <textarea class="fi" placeholder="Your Message (optional)" id="cmsg" rows="3"></textarea>
+      <div class="fdiv"></div>
+      <button class="btn-sun-full" onclick="submitContact()">Send Message</button>
+      <button class="btn-wa-full" onclick="window.open('https://wa.me/923188791637?text=Hi! I need to discuss solar solutions from City of Saints Solar','_blank')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send via WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="sec sec-alt">
+  <div class="sr">
+    <span class="eyebrow">✦ Our Location</span>
+    <h2 class="sec-title">Find Our <span>Office</span></h2>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-info sr">
+      <div class="ci-card"><div class="ci-icon">📍</div><div><div class="ci-label">Address</div><div class="ci-val">Multan, Punjab, Pakistan</div></div></div>
+      <div class="ci-card"><div class="ci-icon">📞</div><div><div class="ci-label">Phone</div><div class="ci-val">0318-4195665</div></div></div>
+      <div class="ci-card"><div class="ci-icon">⏰</div><div><div class="ci-label">Office Hours</div><div class="ci-val">Mon–Sat: 9AM – 6PM</div></div></div>
+      <div class="ci-card"><div class="ci-icon">🚗</div><div><div class="ci-label">Free Site Survey</div><div class="ci-val">We Come to You — Free!</div></div></div>
+    </div>
+    <div class="loc-frame sr d2">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108962.49!2d71.418!3d30.157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3922b7a878c45c67%3A0x6e9cf7f15dc1e99c!2sMultan%2C+Punjab%2C+Pakistan!5e0!3m2!1sen!2spk!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== BOOKING/QUOTE PAGE ===== -->
+<div id="page-book-quote" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Free Site Survey & Quote</span>
+    <h2 class="sec-title">Book Your <span>Solar Consultation</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Fill in details — our expert will contact you within 2 hours for a free assessment</p>
+  </div>
+  <div class="quote-wrap">
+    <div class="quote-form sr">
+      <div class="quote-title">Free Solar Quote Form</div>
+      <div class="quote-sub">No obligation — 100% free consultation</div>
+      <div class="frow">
+        <input type="text" class="fi" placeholder="Your Name *" id="qn">
+        <input type="text" class="fi" placeholder="Phone Number *" id="qph">
+      </div>
+      <div class="frow">
+        <select class="fs" id="qtype">
+          <option value="">Property Type</option>
+          <option>Residential Home</option>
+          <option>Commercial Office</option>
+          <option>Industrial Factory</option>
+          <option>Agriculture / Farm</option>
+          <option>Mosque / School</option>
+        </select>
+        <select class="fs" id="qsystem">
+          <option value="">System Type</option>
+          <option>On-Grid (Zero Bill)</option>
+          <option>Off-Grid (No Grid Reliance)</option>
+          <option>Hybrid System</option>
+          <option>Not Sure — Need Advice</option>
+        </select>
+      </div>
+      <div class="frow">
+        <input type="text" class="fi" placeholder="Monthly Bill (PKR)" id="qbill">
+        <input type="text" class="fi" placeholder="Location / Area" id="qloc">
+      </div>
+      <select class="fs" id="qbudget">
+        <option value="">Budget Range (Required)</option>
+        <option>PKR 3-5 Lac</option>
+        <option>PKR 5-10 Lac</option>
+        <option>PKR 10-20 Lac</option>
+        <option>PKR 20 Lac+</option>
+        <option>Not Sure</option>
+      </select>
+      <input type="text" class="fi" placeholder="Any Special Requirements?" id="qnote">
+      <div class="fdiv"></div>
+      <button class="btn-sun-full" onclick="submitQuote()">Submit Request</button>
+      <button class="btn-wa-full" onclick="window.open('https://wa.me/923188791637?text=Hi! I want a free solar quote from City of Saints Solar, my name is [Your Name]','_blank')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send via WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== FAQ PAGE (NEW) ===== -->
+<div id="page-faq" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Frequently Asked Questions</span>
+    <h2 class="sec-title">Solar <span>FAQs</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Find answers to all your questions here.</p>
+  </div>
+  <div class="quote-wrap sr" style="margin-top:50px;">
+    <div class="content-section" style="border-top:none; margin-top:0;">
+      <h3>General Solar Questions</h3>
+      <p>**Q: What is solar energy?**<br>A: Solar energy is a method of generating electricity from sunlight. Solar panels absorb sunlight and convert it into electricity.</p>
+      <p>**Q: What types of solar systems are there?**<br>A: There are three main types: On-Grid (connected to the utility grid), Off-Grid (independent from the grid with battery backup), and Hybrid (a combination of both).</p>
+      <p>**Q: How can I get a zero electricity bill?**<br>A: With an On-Grid system, if your solar production exceeds your consumption, you can sell the extra electricity to the utility through "Net Metering" to reduce your bill to zero.</p>
+    </div>
+    <div class="content-section">
+      <h3>Installation & Maintenance</h3>
+      <p>**Q: How long does solar system installation take?**<br>A: For residential homes, it usually takes 2-3 days. Commercial or industrial projects may take longer, depending on the project size.</p>
+      <p>**Q: How are solar panels cleaned?**<br>A: Panels should be regularly cleaned with water and a soft brush to maintain their efficiency. Our AMC service includes professional cleaning.</p>
+      <p>**Q: Will a solar system work during load shedding?**<br>A: On-Grid systems shut down during grid outages for safety reasons. However, Off-Grid and Hybrid systems provide electricity during load shedding with battery backup.</p>
+    </div>
+    <div class="content-section">
+      <h3>Cost & Savings</h3>
+      <p>**Q: How much does it cost to install a solar system?**<br>A: The cost depends on the system size (kW), panel and inverter quality, and batteries. We offer a free site survey and a customized quote.</p>
+      <p>**Q: What warranty do solar systems come with?**<br>A: Our panels have a 25-year performance warranty, and inverters come with a 5-10 year product warranty. Our installations also include a 10-year service warranty.</p>
+      <p>**Q: Are installment plans available for solar systems?**<br>A: Yes, we offer easy installment plans in collaboration with our bank partners.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== BLOG/NEWS PAGE (NEW) ===== -->
+<div id="page-blog" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Latest Updates</span>
+    <h2 class="sec-title">Our Blog & <span>News</span></h2>
+    <p class="sec-sub" style="margin:0 auto">The latest news and tips from the world of solar energy.</p>
+  </div>
+  <div class="test-grid blog-grid" style="margin-top:50px;"> <!-- Reusing test-grid for layout -->
+    <div class="blog-post sr">
+      <h4>The Future of Solar Energy in Multan</h4>
+      <span class="date">April 1, 2025</span>
+      <p>The future of solar energy in Multan is bright. With government policies and increased awareness, solar adoption is rapidly growing...</p>
+      <a href="#" style="color:var(--sun); text-decoration:none;">Read More →</a>
+    </div>
+    <div class="blog-post sr d1">
+      <h4>5 Tips to Maximize Your Solar Savings</h4>
+      <span class="date">March 15, 2025</span>
+      <p>Key tips to get the most out of your solar system: panel cleaning, energy consumption monitoring, and more...</p>
+      <a href="#" style="color:var(--sun); text-decoration:none;">Read More →</a>
+    </div>
+    <div class="blog-post sr d2">
+      <h4>Hybrid Solar: The Best of Both Worlds</h4>
+      <span class="date">February 28, 2025</span>
+      <p>A hybrid solar system combines the benefits of both on-grid and off-grid. Learn how it saves you from load shedding and high bills...</p>
+      <a href="#" style="color:var(--sun); text-decoration:none;">Read More →</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:30px">
+    <button class="btn-ghost" onclick="showPage('contact')">Suggest a Topic →</button>
+  </div>
+</section>
+</div>
+
+<!-- ===== CAREERS PAGE (NEW) ===== -->
+<div id="page-careers" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Join Our Team</span>
+    <h2 class="sec-title">Build Your Career with <span>City of Saints Solar</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Build your future with our rapidly growing company.</p>
+  </div>
+  <div class="quote-wrap sr" style="margin-top:50px;">
+    <div class="content-section" style="border-top:none; margin-top:0;">
+      <h3>Why Work With Us?</h3>
+      <p>At City of Saints Solar, we don't just install panels; we lay the foundation for a brighter future. We offer talented individuals opportunities to learn, grow, and be part of the solar energy revolution.</p>
+      <ul>
+        <li>Competitive Salary & Benefits</li>
+        <li>Professional Growth Opportunities</li>
+        <li>Dynamic & Supportive Work Environment</li>
+        <li>Contribute to a Greener Pakistan</li>
+      </ul>
+    </div>
+    <div class="content-section">
+      <h3>Current Openings</h3>
+      <p>Currently, we are looking for passionate individuals to fill the following roles:</p>
+      <ul>
+        <li>**Solar Sales Executive:** Experience in solar sales preferred.</li>
+        <li>**Electrical Engineer (Solar Focus):** PEC certified, 2+ years experience.</li>
+        <li>**Solar Technician:** Hands-on experience with installations.</li>
+        <li>**Customer Support Representative:** Excellent communication skills.</li>
+      </ul>
+      <p>To apply, please send your resume to <a href="mailto:careers@cityofsaintssolar.com" style="color:var(--sun); text-decoration:none;">careers@cityofsaintssolar.com</a> or contact us directly.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== PRIVACY POLICY PAGE (NEW) ===== -->
+<div id="page-privacy" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Legal Information</span>
+    <h2 class="sec-title">Privacy <span>Policy</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Your data protection is our responsibility.</p>
+  </div>
+  <div class="quote-wrap sr" style="margin-top:50px;">
+    <div class="content-section" style="border-top:none; margin-top:0;">
+      <h3>Information We Collect</h3>
+      <p>We collect personal information such as your name, phone number, email address, and location when you use our services or fill out forms.</p>
+      <h3>How We Use Your Information</h3>
+      <p>We use your information to provide quotes, deliver services, offer customer support, and improve our services. We do not share your information without your permission.</p>
+      <h3>Data Security</h3>
+      <p>We implement appropriate security measures to protect your personal information from unauthorized access, disclosure, alteration, and destruction.</p>
+      <p>For any privacy-related queries, please contact us at <a href="mailto:privacy@cityofsaintssolar.com" style="color:var(--sun); text-decoration:none;">privacy@cityofsaintssolar.com</a>.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== TERMS & CONDITIONS PAGE (NEW) ===== -->
+<div id="page-terms" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Legal Information</span>
+    <h2 class="sec-title">Terms & <span>Conditions</span></h2>
+    <p class="sec-sub" style="margin:0 auto">Terms of use for our services.</p>
+  </div>
+  <div class="quote-wrap sr" style="margin-top:50px;">
+    <div class="content-section" style="border-top:none; margin-top:0;">
+      <h3>Service Agreement</h3>
+      <p>By using our services, you agree to our terms and conditions. This includes installation, maintenance, warranty claims, and payment schedules.</p>
+      <h3>Warranty Policy</h3>
+      <p>We provide comprehensive warranties on our products and services. For details, please refer to our official warranty policy document.</p>
+      <h3>Limitation of Liability</h3>
+      <p>City of Saints Solar limits its responsibilities regarding its services as stated in our detailed agreement.</p>
+      <p>For more information, please contact our team or request the complete Terms & Conditions document.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== SITEMAP PAGE (NEW) ===== -->
+<div id="page-sitemap" class="page">
+<section class="sec">
+  <div class="sr" style="text-align:center">
+    <span class="eyebrow">✦ Website Structure</span>
+    <h2 class="sec-title">Site <span>Map</span></h2>
+    <p class="sec-sub" style="margin:0 auto">An overview of all pages on our website.</p>
+  </div>
+  <div class="quote-wrap sr" style="margin-top:50px; text-align:left;">
+    <div class="content-section" style="border-top:none; margin-top:0;">
+      <h3>Main Pages</h3>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('about')">About Us</a>
+          <ul>
+            <li>Our Story</li>
+            <li>Vision & Mission</li>
+            <li>Our Values</li>
+            <li>Our Team</li>
+          </ul>
+        </li>
+        <li><a href="#" onclick="showPage('services')">Services</a>
+          <ul>
+            <li>On-Grid Systems</li>
+            <li>Off-Grid Systems</li>
+            <li>Hybrid Systems</li>
+            <li>Residential Solar Solutions</li>
+            <li>Commercial & Industrial Solar</li>
+            <li>Solar Water Pump</li>
+            <li>Solar Street Lights</li>
+            <li>AMC & Maintenance</li>
+          </ul>
+        </li>
+        <li><a href="#" onclick="showPage('products')">Products</a>
+          <ul>
+            <li>Solar Panels</li>
+            <li>Solar Inverters</li>
+            <li>Lithium Batteries</li>
+            <li>Mounting Structure</li>
+            <li>Solar Packages (3kW, 5kW, 10kW)</li>
+            <li>Payment Options</li>
+          </ul>
+        </li>
+        <li><a href="#" onclick="showPage('projects')">Projects</a>
+          <ul>
+            <li>Residential Project Highlights</li>
+            <li>Commercial & Industrial Success Stories</li>
+          </ul>
+        </li>
+        <li><a href="#" onclick="showPage('calculator')">Solar Calculator</a></li>
+        <li><a href="#" onclick="showPage('gallery')">Gallery</a>
+          <ul>
+            <li>Residential Solar Gallery</li>
+            <li>Commercial Solar Gallery</li>
+          </ul>
+        </li>
+        <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+        <li><a href="#" onclick="showPage('book-quote')">Get Free Quote / Book Site Survey</a></li>
+      </ul>
+    </div>
+    <div class="content-section">
+      <h3>Additional Pages</h3>
+      <ul>
+        <li><a href="#" onclick="showPage('faq')">Frequently Asked Questions (FAQ)</a></li>
+        <li><a href="#" onclick="showPage('blog')">Blog & News</a></li>
+        <li><a href="#" onclick="showPage('careers')">Careers</a></li>
+        <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+        <li><a href="#" onclick="showPage('terms')">Terms & Conditions</a></li>
+        <li><a href="#" onclick="showPage('sitemap')">🗺️ Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<!-- CONTACT STRIP (shown on all pages) -->
+<div class="cstrip">
+  <a href="https://wa.me/923188791637" class="cs" target="_blank"><div class="cs-icon">💬</div><div><div class="cs-l">WhatsApp</div><div class="cs-v">0318-8791637</div></div></a>
+  <a href="tel:03184195665" class="cs"><div class="cs-icon">📞</div><div><div class="cs-l">Call Now</div><div class="cs-v">0318-4195665</div></div></a>
+  <a href="#" onclick="showPage('contact')" class="cs"><div class="cs-icon">📍</div><div><div class="cs-l">Location</div><div class="cs-v">Multan, Pakistan</div></div></a>
+</div>
+
+<!-- FLOATS -->
+<div class="fls">
+  <a href="https://wa.me/923188791637?text=Hi! I want a free solar quote from City of Saints Solar ☀️" class="fl-wa" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  <a href="tel:03184195665" class="fl-call">📞</a>
+  <button class="fl-msg" onclick="openMessageModal()">✉️</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-logo-wrap"><div class="f-logo-icon">⚡</div><div class="f-logo-text">CITY OF SAINTS <span>SOLAR</span></div></div>
+    <p class="f-desc">Multan's most trusted solar energy company. Over 500 installations, 10-year warranty, free site survey. Achieve zero electricity bills!</p>
+    <div class="f-social">
+      <a class="f-soc" href="#" title="Facebook">📘</a>
+      <a class="f-soc" href="#" title="Instagram">📸</a>
+      <a class="f-soc" href="#" title="YouTube">▶️</a>
+      <a class="f-soc" href="https://wa.me/923188791637" title="WhatsApp">💬</a>
+      <a class="f-soc" href="#" title="LinkedIn">💼</a>
+    </div>
+  </div>
+  <div>
+    <span class="f-head">Services</span>
+    <ul class="f-list">
+      <li><a href="#" onclick="showPage('services')">On-Grid Systems</a></li>
+      <li><a href="#" onclick="showPage('services')">Off-Grid Systems</a></li>
+      <li><a href="#" onclick="showPage('services')">Hybrid Systems</a></li>
+      <li><a href="#" onclick="showPage('services')">Solar Water Pump</a></li>
+      <li><a href="#" onclick="showPage('services')">Maintenance / AMC</a></li>
+    </ul>
+  </div>
+  <div>
+    <span class="f-head">Quick Links</span>
+    <ul class="f-list">
+      <li><a href="#" onclick="showPage('products')">Products</a></li>
+      <li><a href="#" onclick="showPage('projects')">Projects</a></li>
+      <li><a href="#" onclick="showPage('calculator')">Bill Calculator</a></li>
+      <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+      <li><a href="#" onclick="showPage('testimonials')">Reviews</a></li>
+    </ul>
+  </div>
+  <div>
+    <span class="f-head">Contact & Info</span>
+    <ul class="f-list">
+      <li><a href="tel:03184195665">📞 0318-4195665</a></li>
+      <li><a href="https://wa.me/923188791637" target="_blank">💬 WhatsApp</a></li>
+      <li><a href="#" onclick="showPage('about')">ℹ️ About Us</a></li>
+      <li><a href="#" onclick="showPage('book-quote')">📋 Free Quote</a></li>
+      <li><a href="#" onclick="showPage('contact')">📍 Find Us</a></li>
+      <li><a href="#" onclick="showPage('faq')">❓ FAQ</a></li>
+      <li><a href="#" onclick="showPage('blog')">📰 Blog</a></li>
+      <li><a href="#" onclick="showPage('careers')">💼 Careers</a></li>
+      <li><a href="#" onclick="showPage('privacy')">🔒 Privacy Policy</a></li>
+      <li><a href="#" onclick="showPage('terms')">📜 Terms & Conditions</a></li>
+      <li><a href="#" onclick="showPage('sitemap')">🗺️ Sitemap</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="f-bt">
+  <span>© 2025 City of Saints Solar · Multan · All Rights Reserved</span>
+  <span>Developed by SkyEagle Digital Agency 🚀</span>
+</div>
+
+<!-- MODAL FOR QUOTES/REVIEWS -->
+<div class="mbg" id="modal">
+  <div class="mbox">
+    <button class="mx" onclick="closeModal()">✕</button>
+    <span class="eyebrow">☀️ Free Quote</span>
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:16px" id="m-title">Get Free Solar Quote</div>
+    <div style="font-size:11px;color:var(--gray);margin-bottom:20px;letter-spacing:1px" id="m-svc">Service: General Inquiry</div>
+    <input type="text" class="fi" placeholder="Your Name *" id="mn">
+    <input type="text" class="fi" placeholder="Phone Number *" id="mp">
+    <select class="fs" id="mpay">
+      <option value="">Monthly Bill Amount / Review Category</option>
+      <option>PKR 5,000 - 10,000</option>
+      <option>PKR 10,000 - 25,000</option>
+      <option>PKR 25,000 - 50,000</option>
+      <option>PKR 50,000+</option>
+      <option>To Submit a Review</option>
+    </select>
+    <textarea class="fi" placeholder="Your message or review (optional)" id="mmsg" rows="3"></textarea>
+    <div style="height:1px;background:rgba(255,255,255,.1);margin:14px 0"></div>
+    <button class="btn-sun-full" onclick="modalSubmit()">Submit Request</button>
+    <button class="btn-wa-full" style="margin-top:8px" onclick="window.open(https://wa.me/923188791637?textt=Hi! I want to inquire about solar from City of Saints Solar, my name is ' + (document.getElementById('mn').value || 'Customer'),'_blank')">📞 WhatsApp Now</button>
+  </div>
+</div>
+
+<!-- SUCCESS MESSAGE MODAL (NEW) -->
+<div class="mbg success-modal" id="success-modal">
+    <div class="mbox">
+        <button class="mx" onclick="closeSuccessModal()">✕</button>
+        <span class="eyebrow">✅ Success!</span>
+        <h3>Thank You!</h3>
+        <p>Your request has been successfully submitted. Our team will contact you shortly.</p>
+        <button class="btn-sun-full" onclick="closeSuccessModal()">OK</button>
+    </div>
+</div>
+
+<!-- MESSAGE US MODAL (NEW) -->
+<div class="mbg" id="message-modal">
+  <div class="mbox">
+    <button class="mx" onclick="closeMessageModal()">✕</button>
+    <span class="eyebrow">✉️ Quick Message</span>
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:16px">Send Us a Direct Message</div>
+    <input type="text" class="fi" placeholder="Your Name *" id="msg-name">
+    <input type="text" class="fi" placeholder="Phone Number *" id="msg-phone">
+    <textarea class="fi" placeholder="Your Message *" id="msg-text" rows="5"></textarea>
+    <div style="height:1px;background:rgba(255,255,255,.1);margin:14px 0"></div>
+    <button class="btn-sun-full" onclick="submitMessageForm()">Send Message</button>
+    <button class="btn-wa-full" style="margin-top:8px" onclick="window.open('https://wa.me/923188791637?text=Hi! I have a general query for City of Saints Solar, my name is ' + (document.getElementById('msg-name').value || 'Customer'),'_blank')">💬 WhatsApp Us</button>
+  </div>
+</div>
+
+
+<script>
+// LOADER
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const l=document.getElementById('loader');
+    l.style.opacity='0';l.style.transition='opacity .8s';
+    setTimeout(()=>l.style.display='none',800);
+  },2400);
+});
+
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';},80);
+});
+document.querySelectorAll('a,button,.svc-card,.prod-card,.proj-card,.tc,.pw,.gi,.hero-slide,.team-member,.brand-logo').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='var(--sun)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(245,158,11,0.5)';});
+});
+
+// PAGE NAVIGATION
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Re-trigger scroll reveal
+  setTimeout(()=>{
+    document.querySelectorAll('.sr').forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      if(rect.top<window.innerHeight*0.9)el.classList.add('vis');
+    });
+  },100);
+}
+
+// HERO SLIDESHOW
+let currentSlide = 0;
+const slides = document.querySelectorAll('#hero-slideshow .hero-slide');
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    if (i === index) {
+      slide.classList.add('active');
+    }
+  });
+}
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+// Start slideshow only if slides exist
+if (slides.length > 0) {
+  showSlide(currentSlide); // Show initial slide
+  setInterval(nextSlide, 5000); // Change slide every 5 seconds
+}
+
+
+// MODAL FOR QUOTES/REVIEWS
+let selSvc='General Inquiry';
+function openModal(s){
+  selSvc=s;
+  document.getElementById('m-title').textContent = (s === 'Submit a Review') ? 'Submit Your Review' : 'Get Free Solar Quote';
+  document.getElementById('m-svc').textContent='☀️ '+s;
+  document.getElementById('mmsg').placeholder = (s === 'Submit a Review') ? 'Your valuable feedback...' : 'Any special requirements? (optional)';
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+  // Clear modal fields
+  document.getElementById('mn').value = '';
+  document.getElementById('mp').value = '';
+  document.getElementById('mpay').value = '';
+  document.getElementById('mmsg').value = '';
+}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+
+function modalSubmit(){
+  const n=document.getElementById('mn').value||'Customer';
+  const p=document.getElementById('mp').value||'';
+  const bill=document.getElementById('mpay').value||'Not specified';
+  const msgText=document.getElementById('mmsg').value||'No additional message.';
+
+  if (n === 'Customer' || p === '') {
+    alert('Please fill in your Name and Phone Number.');
+    return;
+  }
+
+  let logMsg;
+  if (selSvc === 'Submit a Review') {
+    logMsg=`⭐️ New Review Submission\nName: ${n}\nPhone: ${p}\nExperience (from dropdown): ${bill}\nReview: ${msgText}`;
+  } else {
+    logMsg=`☀️ Free Solar Quote Request\nService: ${selSvc}\nName: ${n}\nPhone: ${p}\nMonthly Bill/Budget: ${bill}\nMessage: ${msgText}`;
+  }
+  console.log("--- Form Submission (Simulated Database Entry) ---\n", logMsg);
+  
+  closeModal();
+  openSuccessModal(); // Show success message
+}
+
+// SUCCESS MESSAGE MODAL
+function openSuccessModal() {
+    document.getElementById('success-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeSuccessModal() {
+    document.getElementById('success-modal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.getElementById('success-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('success-modal')) closeSuccessModal();
+});
+
+
+// MESSAGE US MODAL
+function openMessageModal() {
+  document.getElementById('message-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMessageModal() {
+  document.getElementById('message-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('msg-name').value = '';
+  document.getElementById('msg-phone').value = '';
+  document.getElementById('msg-text').value = '';
+}
+document.getElementById('message-modal').addEventListener('click',e=>{if(e.target===document.getElementById('message-modal'))closeMessageModal();});
+
+function submitMessageForm() {
+  const n = document.getElementById('msg-name').value || '';
+  const p = document.getElementById('msg-phone').value || '';
+  const m = document.getElementById('msg-text').value || '';
+
+  if (n === '' || p === '' || m === '') {
+    alert('Please fill in your Name, Phone Number, and Message.');
+    return;
+  }
+
+  const logMsg = `✉️ Direct Message from Website\nName: ${n}\nPhone: ${p}\nMessage: ${m}`;
+  console.log("--- Direct Message Submission (Simulated Database Entry) ---\n", logMsg);
+
+  closeMessageModal();
+  openSuccessModal(); // Show success message
+}
+
+
+// CONTACT FORM
+function submitContact(){
+  const n=document.getElementById('cn').value||'Customer';
+  const p=document.getElementById('cph').value||'';
+  const svc=document.getElementById('cservice').value||'General Inquiry';
+  const loc=document.getElementById('cloc').value||'Not specified';
+  const msgText=document.getElementById('cmsg').value||'No message provided.';
+
+  if (n === 'Customer' || p === '') {
+    alert('Please fill in your Name and Phone Number.');
+    return;
+  }
+
+  const logMsg=`☀️ Contact Form Submission\nService: ${svc}\nName: ${n}\nPhone: ${p}\nLocation: ${loc}\nMessage: ${msgText}`;
+  console.log("--- Contact Form Submission (Simulated Database Entry) ---\n", logMsg);
+  
+  // Clear form fields
+  document.getElementById('cn').value = '';
+  document.getElementById('cph').value = '';
+  document.getElementById('cservice').value = '';
+  document.getElementById('cloc').value = '';
+  document.getElementById('cmsg').value = '';
+
+  openSuccessModal(); // Show success message
+}
+
+// QUOTE FORM
+function submitQuote(){
+  const n=document.getElementById('qn').value||'Customer';
+  const p=document.getElementById('qph').value||'';
+  const type=document.getElementById('qtype').value||'Not specified';
+  const sys=document.getElementById('qsystem').value||'Not sure';
+  const bill=document.getElementById('qbill').value||'Not specified';
+  const loc=document.getElementById('qloc').value||'Not specified';
+  const budget=document.getElementById('qbudget').value||'Not Sure';
+  const note=document.getElementById('qnote').value||'No special requirements.';
+  
+  if (n === 'Customer' || p === '' || budget === 'Not Sure') {
+    alert('Please fill in your Name, Phone Number, and Budget Range.');
+    return;
+  }
+
+  const logMsg=`☀️ Solar Quote Request\nName: ${n}\nPhone: ${p}\nProperty Type: ${type}\nSystem Type: ${sys}\nMonthly Bill: PKR ${bill}\nLocation: ${loc}\nBudget: ${budget}\nNotes: ${note}`;
+  console.log("--- Quote Form Submission (Simulated Database Entry) ---\n", logMsg);
+  
+  // Clear form fields after submission
+  document.getElementById('qn').value = '';
+  document.getElementById('qph').value = '';
+  document.getElementById('qtype').value = '';
+  document.getElementById('qsystem').value = '';
+  document.getElementById('qbill').value = '';
+  document.getElementById('qloc').value = '';
+  document.getElementById('qbudget').value = '';
+  document.getElementById('qnote').value = '';
+
+  openSuccessModal(); // Show success message
+}
+
+// CALCULATOR
+function calcSavings(){
+  const bill=parseFloat(document.getElementById('c-bill').value)||0;
+  const units=parseFloat(document.getElementById('c-units').value)||0;
+  if(!bill&&!units){alert('Please enter your monthly bill or units!');return;}
+  const b=bill||units*50; // Estimate bill if only units are provided, assuming Rs. 50/unit
+  const monthly=Math.round(b*0.85); // 85% savings target
+  const yearly=monthly*12;
+  let sys='5kW',cost='PKR 7 Lac',roi='24 months'; // Default values
+
+  // Dynamic system size and cost estimation based on monthly bill
+  if(b<6000){sys='3kW (Small Home)';cost='PKR 4.5 Lac';roi='18-22 months';}
+  else if(b<15000){sys='5kW (Medium Home)';cost='PKR 7 Lac';roi='22-26 months';}
+  else if(b<30000){sys='10kW (Large Home/Small Business)';cost='PKR 13 Lac';roi='24-30 months';}
+  else if(b<60000){sys='20kW (Commercial/Industrial)';cost='PKR 25 Lac';roi='28-36 months';}
+  else{sys='30kW+ (Large Industrial)';cost='PKR 40 Lac+';roi='30-40 months';}
+
+  const total='PKR '+(Math.round(yearly*25/100000)*100000).toLocaleString('en-PK'); // Total saving over 25 years
+  document.getElementById('r-monthly').textContent='PKR '+monthly.toLocaleString('en-PK');
+  document.getElementById('r-yearly').textContent='PKR '+yearly.toLocaleString('en-PK');
+  document.getElementById('r-system').textContent=sys;
+  document.getElementById('r-cost').textContent=cost;
+  document.getElementById('r-roi').textContent=roi;
+  document.getElementById('r-total').textContent=total;
+}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.06});
+document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+
+// Simple Search Functionality (Frontend only)
+document.getElementById('n-search').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    if (searchTerm.length > 2) {
+        let found = false;
+        document.querySelectorAll('.n-links a').forEach(link => {
+            if (link.textContent.toLowerCase().includes(searchTerm)) {
+                link.style.color = 'var(--sun)';
+                found = true;
+            } else {
+                link.style.color = 'var(--gray)';
+            }
+        });
+        document.querySelectorAll('.sec-title, .sec-sub, .hero h1, .hero-p, .svc-name, .prod-name, .proj-name, .tm-name, .blog-post h4, .blog-post p, .content-section h3, .content-section p').forEach(textEl => {
+            if (textEl.textContent.toLowerCase().includes(searchTerm)) {
+                console.log(`Found "${searchTerm}" in:`, textEl.textContent);
+                found = true;
+            }
+        });
+
+        if (found) {
+            e.target.style.borderColor = 'var(--green)';
+        } else {
+            e.target.style.borderColor = 'var(--sun)';
+        }
+    } else {
+        e.target.style.borderColor = 'rgba(255,255,255,.15)';
+        document.querySelectorAll('.n-links a').forEach(link => link.style.color = 'var(--gray)');
+    }
+});
+
+// ── LIVE NOTIFICATIONS ──
+const reviews = [
+  {name:'Ahmad Raza',loc:'Multan City',msg:'Bill dropped from Rs.18,000 to almost zero! Best investment ever.',time:'2 min ago',avatar:'https://i.pravatar.cc/80?img=11'},
+  {name:'Fatima Sheikh',loc:'Bosan Road',msg:'Professional team, clean installation. Highly recommended! ⭐⭐⭐⭐⭐',time:'5 min ago',avatar:'https://i.pravatar.cc/80?img=47'},
+  {name:'Usman Tariq',loc:'Gulgasht Colony',msg:'Hybrid system is amazing — no load shedding issues anymore.',time:'8 min ago',avatar:'https://i.pravatar.cc/80?img=33'},
+  {name:'Sara Malik',loc:'Model Town',msg:'Free site survey was so helpful. They explained everything clearly.',time:'12 min ago',avatar:'https://i.pravatar.cc/80?img=48'},
+  {name:'Bilal Hussain',loc:'New Multan',msg:'10kW system installed in one day. Super fast team! ⚡',time:'15 min ago',avatar:'https://i.pravatar.cc/80?img=15'},
+  {name:'Rabia Noor',loc:'Cantt Area',msg:'Already saving Rs.22,000 every month. Amazing ROI!',time:'20 min ago',avatar:'https://i.pravatar.cc/80?img=44'},
+  {name:'Kamran Ali',loc:'Hussain Agahi',msg:'Excellent after-sale support. Team responds immediately.',time:'25 min ago',avatar:'https://i.pravatar.cc/80?img=12'},
+];
+
+const wrap = document.getElementById('notifWrap');
+let nIdx = 0;
+
+function showNotif(){
+  const r = reviews[nIdx % reviews.length];
+  nIdx++;
+
+  const el = document.createElement('div');
+  el.className='notif';
+  el.innerHTML=`
+    <img class="notif-avatar" src="${r.avatar}" alt="${r.name}">
+    <div class="notif-body">
+      <div class="notif-name">${r.name} <span style="font-weight:400;color:var(--gray);font-size:11px">· ${r.loc}</span></div>
+      <div class="notif-msg">${r.msg}</div>
+      <div class="notif-time">✅ Verified Customer · ${r.time}</div>
+    </div>
+  `;
+  wrap.appendChild(el);
+
+  // limit to 2 visible
+  const all = wrap.querySelectorAll('.notif');
+  if(all.length > 2){
+    const old = all[0];
+    old.classList.remove('show');
+    setTimeout(()=>old.remove(),600);
+  }
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('show')));
+
+  // auto-hide after 4.5s
+  setTimeout(()=>{
+    el.classList.remove('show');
+    setTimeout(()=>el.remove(),600);
+  },4500);
+}
+
+// first one after 2s, then every 5s
+setTimeout(()=>{
+  showNotif();
+  setInterval(showNotif,5000);
+},2000);
+</script>
+</body>
+</html>
