@@ -966,40 +966,162 @@ footer .container{
 .notif-msg{font-size:0.85rem;color:var(--text-secondary-dark);line-height:1.5;} /* Changed */
 .notif-time{font-size:0.7rem;color:var(--blue-accent);margin-top:0.4rem;letter-spacing:0.5px;} /* Changed */
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none; /* Hidden by default for desktop */
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1.5rem; /* Space from n-actions */
+  z-index: 901; /* Above nav but below mobile-menu */
+  margin-right: 1.5rem; /* Space before nav-actions */
+  order: 1; /* Place it after logo in flex order */
+}
+.mobile-menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-dark);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.mobile-menu-toggle.open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.mobile-menu-toggle.open .bar:nth-child(2) { opacity: 0; }
+.mobile-menu-toggle.open .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+
+/* Mobile Menu (Off-Canvas) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden off-screen by default */
+  width: 300px;
+  max-width: 85%; /* Adjust as needed */
+  height: 100vh;
+  background: var(--light-bg2);
+  z-index: 1000;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+  transition: right 0.4s cubic-bezier(.175,.885,.32,1.275);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+.mobile-menu.open {
+  right: 0; /* Slide in */
+}
+
+.mobile-menu-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.mobile-menu-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-secondary-dark);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.mobile-menu-close:hover {
+  color: var(--blue-accent);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  flex-grow: 1; /* Pushes actions to bottom */
+}
+.mobile-nav-links a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.2s ease;
+  padding: 8px 0;
+  display: block;
+  position: relative;
+}
+.mobile-nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--blue-accent);
+  transition: width .3s ease;
+}
+.mobile-nav-links a:hover {
+  color: var(--blue-accent);
+  transform: translateX(5px);
+}
+.mobile-nav-links a:hover::after {
+  width: 100%;
+}
+
+.mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+/* Ensure full width buttons in mobile actions */
+.mobile-actions .btn-full { width: 100%; }
+
 
 /* RESPONSIVE */
 @media(max-width:1024px){
-  .n-links{display:none;} /* Hide desktop nav links on smaller screens */
+  /* Existing styles */
+  .n-links{display:none;}
   .n-actions{flex-wrap:wrap;justify-content:flex-end;width:auto;}
   .n-search-input{width:100%;margin-top:0.8rem; order:-1;}
-  .hero{grid-template-columns:1fr; padding-top:2rem;}
-  .hero-l{padding-bottom:2rem;}
-  .hero-r{height:350px; margin-top:2rem; padding:0;}
-  .hero h1{font-size:clamp(3rem,8vw,4.5rem);}
-  .hero-p{max-width:none;}
-  .hero-stats{justify-content:center;}
-  .svc-grid, .prod-grid, .proj-grid, .why-grid, .test-grid, .team-grid{
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+  /* New mobile specific overrides */
+  nav .n-actions {
+      display: flex; /* Keep desktop actions as flex for larger tablets */
+      order: 2; /* Position them after the logo and toggle */
+      margin-left: auto; /* Push to right */
+      gap: 0.5rem; /* Reduced gap */
   }
-  .gal-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); grid-auto-rows:minmax(180px,auto);}
-  .gi:first-child, .gi:nth-child(5){grid-column:span 1; grid-row:auto; min-height:auto;} /* Adjust spans for smaller grids */
-  .calc-wrap{grid-template-columns:1fr;}
-  .contact-grid{grid-template-columns:1fr;}
-  .about-grid{grid-template-columns:1fr;}
-  .loc-grid{grid-template-columns:1fr;}
-  footer{grid-template-columns:1fr 1fr;gap:2rem;}
-  footer > div:first-child{padding-left:1.5rem;}
-  .frow{grid-template-columns:1fr;}
-  .content-section { padding: 1.5rem 0;}
-  .content-section h3 { font-size: 1.8rem; }
-  .video-grid {grid-template-columns: 1fr;gap:1.5rem;}
-  .notif-wrap{left:1rem;bottom:1rem;max-width:90%;}
+  nav .n-actions .btn {
+      padding: 0.5rem 1rem; /* Smaller buttons on tablet */
+      font-size: 0.75rem;
+  }
+  nav .n-actions .btn-ghost {
+      display: none; /* Hide call now on tablet nav for space, keep in mobile menu */
+  }
+  .mobile-menu-toggle { display: flex; } /* Show hamburger */
+  
   .cstrip{grid-template-columns:1fr;}
   .cs{border-right:none;border-bottom:1px solid rgba(56,189,248,.08);} /* Changed */
   footer .f-list {padding-left: 1.5rem;} /* Keep consistent padding */
 }
 
 @media (max-width: 768px) {
+  /* Existing styles */
   nav{height:65px; padding:0 1rem;}
   .n-logo-text{font-size:1.1rem;letter-spacing:1px;}
   .n-logo-icon{font-size:1.8rem;}
@@ -1031,6 +1153,11 @@ footer .container{
   .f-head{font-size:0.7rem;letter-spacing:1.5px;}
   .f-list a{font-size:0.85rem;}
   .f-bt{font-size:0.7rem;flex-direction:column;gap:0.5rem;text-align:center;}
+
+  /* Mobile specific nav adjustments */
+  nav .n-actions {
+      display: none; /* Hide desktop actions completely on smaller phones, they are in mobile menu now */
+  }
 }
 
 @media (max-width: 480px) {
@@ -1040,17 +1167,15 @@ footer .container{
   .hero-slide-text{font-size:1.4rem;}
   .hero-slide-text span{font-size:0.8rem;}
   .n-actions{flex-direction:column;gap:0.5rem;width:100%;align-items:stretch;}
-  .n-search-input{margin-top:0.5rem;width:100%;}
-  .n-call, .n-cta{width:100%;}
-  .btn-wa{width:100%;}
-  .hero-btns{flex-direction:column;gap:0.5rem;}
-  .calc-item{flex-direction:column;align-items:flex-start;gap:0.2rem;}
-  .ci-label{font-size:0.8rem;}
-  .ci-val{font-size:1.1rem;}
-  .gal-grid{grid-template-columns:1fr;}
-  .gi:first-child, .gi:nth-child(5){grid-column:auto; grid-row:auto; min-height:auto;}
+  .mobile-menu {
+    width: 100%; /* Full width on very small screens */
+    max-width: 100%;
+  }
   .notif{left:0.5rem;right:0.5rem;max-width:none;} /* Full width on tiny screens */
   .mbox{max-width:95%;}
+  nav .n-actions { /* Re-hide desktop actions */
+    display: none;
+  }
 }
 </style>
 </head>
@@ -1087,7 +1212,47 @@ footer .container{
     <a href="tel:03184195665" class="btn btn-ghost">📞 Call Now</a>
     <button class="btn btn-sun" onclick="showPage('book-quote')">Get Free Quote</button>
   </div>
+  <!-- Mobile Menu Toggle Button -->
+  <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
 </nav>
+
+<!-- Mobile Menu (Off-Canvas) -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="n-logo">
+      <div class="n-logo-icon">⚡</div>
+      <div class="n-logo-text">CITY OF SAINTS <span>SOLAR</span></div>
+    </div>
+    <button class="mobile-menu-close" id="mobile-menu-close">✕</button>
+  </div>
+  <ul class="mobile-nav-links">
+    <li><a href="#" onclick="showPage('home');">Home</a></li>
+    <li><a href="#" onclick="showPage('about');">About Us</a></li>
+    <li><a href="#" onclick="showPage('services');">Services</a></li>
+    <li><a href="#" onclick="showPage('products');">Products</a></li>
+    <li><a href="#" onclick="showPage('projects');">Projects</a></li>
+    <li><a href="#" onclick="showPage('contact');">Contact</a></li>
+    <li><a href="#" onclick="showPage('blog');">Blog</a></li>
+    <li><a href="#" onclick="showPage('faq');">FAQ</a></li>
+    <li><a href="#" onclick="showPage('calculator');">Solar Calculator</a></li>
+    <li><a href="#" onclick="showPage('gallery');">Gallery</a></li>
+    <li><a href="#" onclick="showPage('testimonials');">Testimonials</a></li>
+    <li><a href="#" onclick="showPage('careers');">Careers</a></li>
+    <li><a href="#" onclick="showPage('privacy');">Privacy Policy</a></li>
+    <li><a href="#" onclick="showPage('terms');">Terms & Conditions</a></li>
+    <li><a href="#" onclick="showPage('sitemap');">Sitemap</a></li>
+  </ul>
+  <div class="mobile-actions">
+    <input type="text" class="n-search-input btn-full" placeholder="Search..." id="mobile-search">
+    <a href="tel:03184195665" class="btn btn-ghost btn-full">📞 Call Now</a>
+    <button class="btn btn-sun btn-full" onclick="showPage('book-quote');">Get Free Quote</button>
+  </div>
+</div>
 
 <!-- ===== HOME PAGE ===== -->
 <div id="page-home" class="page active">
@@ -1255,7 +1420,7 @@ footer .container{
 <!-- REVIEWS PREVIEW -->
 <section class="sec">
   <div class="container">
-    <div class="sr" style="text-align:center;margin-bottom:3rem;">
+    <div style="text-align:center;margin-bottom:3rem;" class="sr">
       <span class="eyebrow">✦ Client Reviews</span>
       <h2 class="sec-title">What Our <span>Clients Say</span></h2>
     </div>
@@ -1330,10 +1495,10 @@ footer .container{
       <p class="sec-sub">Certified, warranty-backed products from world's leading brands</p>
     </div>
     <div class="prod-grid">
-      <div class="prod-card sr" onclick="openModal('Solar Panel Inquiry')"><div class="prod-icon">🔆</div><div class="prod-name">Solar Panels</div><div class="prod-desc">Mono PERC, Bifacial, Half-Cut technology. 550W-670W capacity. Tier-1 brands.</div><div class="prod-price"><button class="btn btn-ghost" onclick="showPage('book-quote'); event.stopPropagation();">View Details / Get Quote</button></div></div>
-      <div class="prod-card sr d1" onclick="openModal('Inverter Inquiry')"><div class="prod-icon">🔌</div><div class="prod-name">Solar Inverters</div><div class="prod-desc">Growatt, Solis, Huawei, SolarEdge. String, hybrid, micro inverters available.</div><div class="prod-price"><button class="btn btn-ghost" onclick="showPage('book-quote'); event.stopPropagation();">View Details / Get Quote</button></div></div>
-      <div class="prod-card sr d2" onclick="openModal('Battery Inquiry')"><div class="prod-icon">🔋</div><div class="prod-name">Lithium Batteries</div><div class="prod-desc">LiFePO4 technology. 5kWh-20kWh. 6000+ cycle life. BMS protected.</div><div class="prod-price"><button class="btn btn-ghost" onclick="showPage('book-quote'); event.stopPropagation();">View Details / Get Quote</button></div></div>
-      <div class="prod-card sr d3" onclick="openModal('Structure Inquiry')"><div class="prod-icon">🏗️</div><div class="prod-name">Mounting Structure</div><div class="prod-desc">Galvanized steel, aluminum structures. Roof, ground, carport mounting.</div><div class="prod-price"><button class="btn btn-ghost" onclick="showPage('book-quote'); event.stopPropagation();">View Details / Get Quote</button></div></div>
+      <div class="prod-card sr" onclick="updateQuoteFormWithProduct('Solar Panels'); showPage('book-quote'); event.stopPropagation();"><div class="prod-icon">🔆</div><div class="prod-name">Solar Panels</div><div class="prod-desc">Mono PERC, Bifacial, Half-Cut technology. 550W-670W capacity. Tier-1 brands.</div><div class="prod-price"><button class="btn btn-ghost">View Details / Get Quote</button></div></div>
+      <div class="prod-card sr d1" onclick="updateQuoteFormWithProduct('Solar Inverters'); showPage('book-quote'); event.stopPropagation();"><div class="prod-icon">🔌</div><div class="prod-name">Solar Inverters</div><div class="prod-desc">Growatt, Solis, Huawei, SolarEdge. String, hybrid, micro inverters available.</div><div class="prod-price"><button class="btn btn-ghost">View Details / Get Quote</button></div></div>
+      <div class="prod-card sr d2" onclick="updateQuoteFormWithProduct('Lithium Batteries'); showPage('book-quote'); event.stopPropagation();"><div class="prod-icon">🔋</div><div class="prod-name">Lithium Batteries</div><div class="prod-desc">LiFePO4 technology. 5kWh-20kWh. 6000+ cycle life. BMS protected.</div><div class="prod-price"><button class="btn btn-ghost">View Details / Get Quote</button></div></div>
+      <div class="prod-card sr d3" onclick="updateQuoteFormWithProduct('Mounting Structure'); showPage('book-quote'); event.stopPropagation();"><div class="prod-icon">🏗️</div><div class="prod-name">Mounting Structure</div><div class="prod-desc">Galvanized steel, aluminum structures. Roof, ground, carport mounting.</div><div class="prod-price"><button class="btn btn-ghost">View Details / Get Quote</button></div></div>
     </div>
     <!-- Detailed Product Sub-sections -->
     <div class="content-section sr">
@@ -2221,6 +2386,9 @@ function showPage(id){
       if(rect.top<window.innerHeight*0.9)el.classList.add('vis');
     });
   },100);
+  if (mobileMenu.classList.contains('open')) {
+      closeMobileMenu(); // Close mobile menu when a page link is clicked
+  }
 }
 
 // HERO SLIDESHOW
@@ -2444,6 +2612,29 @@ function updateQuoteFormWithPackage(packageName) {
     }
 }
 
+// Function to update quote form with product inquiry details
+function updateQuoteFormWithProduct(productName) {
+    const qNoteInput = document.getElementById('qnote');
+    const qPanelsInput = document.getElementById('qpanels');
+    const qInverterInput = document.getElementById('qinverter');
+    const qBatteryInput = document.getElementById('qbattery');
+    
+    // Clear specific fields if not relevant for general product inquiry
+    qPanelsInput.value = '';
+    qInverterInput.value = '';
+    qBatteryInput.value = '';
+    
+    qNoteInput.value = `Inquiring about: ${productName}. Please provide more details.`;
+    // Optionally pre-select relevant fields
+    if (productName.includes("Panel")) {
+        qPanelsInput.placeholder = "e.g., 10 for a 5kW system, for " + productName;
+    } else if (productName.includes("Inverter")) {
+        qInverterInput.placeholder = "e.g., 5kW, 10kW, for " + productName;
+    } else if (productName.includes("Battery")) {
+        qBatteryInput.placeholder = "e.g., 10kWh, 20kWh, for " + productName;
+    }
+}
+
 
 // CALCULATOR
 function calcSavings(){
@@ -2508,6 +2699,33 @@ document.getElementById('n-search').addEventListener('input', function(e) {
     }
 });
 
+// Mobile search functionality
+document.getElementById('mobile-search').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    if (searchTerm.length > 2) {
+        let found = false;
+        // Search in mobile nav links
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            if (link.textContent.toLowerCase().includes(searchTerm)) {
+                link.style.color = 'var(--blue-accent)';
+                found = true;
+            } else {
+                link.style.color = 'var(--text-dark)'; // Reset to default
+            }
+        });
+        // You could also add other page content searching here
+        if (found) {
+            e.target.style.borderColor = 'var(--green-wa)';
+        } else {
+            e.target.style.borderColor = 'var(--blue-accent)';
+        }
+    } else {
+        e.target.style.borderColor = 'rgba(0,0,0,.15)';
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => link.style.color = 'var(--text-dark)'); // Reset colors
+    }
+});
+
+
 // ── LIVE NOTIFICATIONS ──
 const reviews = [
   {name:'Ahmad Raza',loc:'Multan City',msg:'Bill dropped from Rs.18,000 to almost zero! Best investment ever.',time:'2 min ago',avatar:'https://i.pravatar.cc/80?img=11'},
@@ -2560,6 +2778,37 @@ setTimeout(()=>{
   showNotif();
   setInterval(showNotif,5000);
 },2000);
+
+// Mobile Menu JS
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+const mobileNavLinks = document.querySelector('.mobile-nav-links'); // Get the UL for links
+
+function openMobileMenu() {
+  mobileMenu.classList.add('open');
+  mobileMenuToggle.classList.add('open');
+  mobileMenuOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling body
+}
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  mobileMenuToggle.classList.remove('open');
+  mobileMenuOverlay.classList.remove('open');
+  document.body.style.overflow = ''; // Allow body scrolling
+}
+
+mobileMenuToggle.addEventListener('click', openMobileMenu);
+mobileMenuClose.addEventListener('click', closeMobileMenu);
+mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Close when clicking outside menu
+
+// Close mobile menu when a link inside it is clicked
+mobileNavLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', closeMobileMenu);
+});
+
 </script>
 </body>
 </html>
